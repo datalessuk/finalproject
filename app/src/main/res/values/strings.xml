@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">finalProject</string>
+    <string name="makeAccount">DON\'T HAVE AN ACCOUNT? SIGN UP!</string>
+    <string name="firstName">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="dateofbithinput">Birthday</string>
+    <string name="emailAddressInput">Email Address</string>
+    <string name="passwordInput">Password</string>
+    <string name="SignUp">CREATE ACCOUNT</string>
+    <string name="actionbarCreate">Create Account</string>
+    <string name="signinbutton">SIGN IN</string>
 </resources>
