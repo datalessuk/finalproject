@@ -18,7 +18,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="108dp"
         android:layout_marginLeft="108dp"
-
+        android:layout_centerHorizontal="true"
         android:layout_marginEnd="123dp"
         android:layout_marginRight="123dp"
         android:layout_marginBottom="361dp"
@@ -43,7 +43,7 @@
         android:textColor="#ffffff"
         android:hint="Password"
         android:ems="10"
-
+        android:layout_centerHorizontal="true"
         android:inputType="textPassword" />
 
     <EditText
@@ -63,6 +63,7 @@
         android:autoText="false"
         android:ems="10"
         android:hint="Email"
+        android:layout_centerHorizontal="true"
         android:inputType="textEmailAddress"
         android:textColor="#ffffff" />
 
@@ -85,6 +86,7 @@
         android:gravity="center"
         android:onClick="onClick"
         android:text="@string/makeAccount"
+        android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         tools:text="@string/makeAccount" />
 
@@ -100,7 +102,7 @@
         android:layout_marginBottom="611dp"
         android:text="CRAFT WATCH"
         android:textColor="@color/colorPrimary"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:textSize="24sp" />
 
     <ProgressBar
