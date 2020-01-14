@@ -72,6 +72,16 @@ public class signUpActivity extends AppCompatActivity {
 
                 date = month + "/" + day + "/" + year;
                 mDisplayDate.setText(date);
+
+                int userAge = getAge(date);
+
+                if(userAge < 18){
+                    mCreateAccountbutton.setEnabled(false);
+                    Toast.makeText(signUpActivity.this,"Sorry You need to be 18 to use Craft Watch",Toast.LENGTH_SHORT).show();
+                }
+                else if(userAge >18){
+                    mCreateAccountbutton.setEnabled(true);
+                }
             }
         };
 
@@ -79,9 +89,12 @@ public class signUpActivity extends AppCompatActivity {
         mCreateAccountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int userAge = getAge(date);
 
-                Toast.makeText(signUpActivity.this,"You Are "+ userAge,Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(signUpActivity.this,"You Are "+ userAge,Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
@@ -89,7 +102,7 @@ public class signUpActivity extends AppCompatActivity {
     }
 
 
-    
+
 
 
     private int getAge(String dobString){
