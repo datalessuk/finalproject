@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "30078032421",
+    "firebase_url": "https://craftwatch-d05dd.firebaseio.com",
+    "project_id": "craftwatch-d05dd",
+    "storage_bucket": "craftwatch-d05dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30078032421:android:2c2fa6f52e808da694fdcc",
+        "android_client_info": {
+          "package_name": "mark.harrison.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30078032421-jo04f8n6qlbbmacp519kptopp3nqef63.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mark.harrison.finalproject",
+            "certificate_hash": "dc6fdbf6093502e1cf6b3f97f32a13aadfefae6e"
+          }
+        },
+        {
+          "client_id": "30078032421-hm2g9a90hrm2u4g2s5id5prum99sujg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQW2rc86hgwUNvAc1bdPWbVMCGNOXmzcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30078032421-hm2g9a90hrm2u4g2s5id5prum99sujg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
