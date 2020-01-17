@@ -7,6 +7,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,31 +21,46 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class signUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private TextView mDisplayDate;
+    private TextView mpasswordInput;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText dateOfBirthInput;
+    EditText passwordInput;
     Button mCreateAccountbutton;
 
     int year;
     int month;
     int day ;
     String date;
+    String pPasswordInput;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
+        //Input for password
+        mpasswordInput = (TextView) findViewById(R.id.signUpPasswordInput);
+
+
+
+
+       //All the input for the date
         mDisplayDate = (TextView) findViewById(R.id.datePicker);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -85,19 +102,34 @@ public class signUpActivity extends AppCompatActivity {
             }
         };
 
-        mCreateAccountbutton = (Button) findViewById(R.id.createAccount);
+        mCreateAccountbutton = findViewById(R.id.createAccount);
         mCreateAccountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            if(!passwordChecker(mpasswordInput.getText().toString())){
 
+                mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
+            }
 
             }
         });
 
+    //End of input for date
 
     }
+    //To make sure the passworld is longer than six chars and has one speical charicater
+    public boolean passwordChecker(String pPasswWord){
+        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+        if(pPasswWord.length() >6){
+            Matcher hasSpecial = special.matcher(pPasswWord);
 
+            return hasSpecial.find();
+        }
+        else {
+            return false;
+        }
 
+    }
 
 
 
