@@ -77,7 +77,7 @@ public class signUpActivity extends AppCompatActivity {
 
                 if(userAge < 18){
                     mCreateAccountbutton.setEnabled(false);
-                    Toast.makeText(signUpActivity.this,"Sorry You need to be over 18 to use Craft Watch",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(signUpActivity.this,"Sorry You need to be over 18 to use Craft Watch",Toast.LENGTH_LONG).show();
                 }
                 else {
                     mCreateAccountbutton.setEnabled(true);
