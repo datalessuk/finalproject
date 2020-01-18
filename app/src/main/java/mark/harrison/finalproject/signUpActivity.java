@@ -102,6 +102,7 @@ public class signUpActivity extends AppCompatActivity {
                 }
                 else {
                     mCreateAccountbutton.setEnabled(true);
+                    mDisplayDate.setError(null);
                 }
             }
         };
@@ -110,10 +111,10 @@ public class signUpActivity extends AppCompatActivity {
         mCreateAccountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //if(!passwordChecker(mpasswordInput.getText().toString())){
+            if(!passwordChecker(mpasswordInput.getText().toString())){
 
-                //mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
-            //}
+                mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
+            }
             if(!emailCheck(mEamilImput.getText().toString())){
                 mEamilImput.setError("Sorry that is not a valid Email Address");
             }
