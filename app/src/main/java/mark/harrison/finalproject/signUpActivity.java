@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -36,6 +37,7 @@ public class signUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView mDisplayDate;
     private TextView mpasswordInput;
+    private TextView mEamilImput;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText dateOfBirthInput;
@@ -56,7 +58,8 @@ public class signUpActivity extends AppCompatActivity {
 
         //Input for password
         mpasswordInput = (TextView) findViewById(R.id.signUpPasswordInput);
-
+        //Input for Email
+        mEamilImput = (TextView) findViewById(R.id.emailInput);
 
 
 
@@ -94,7 +97,8 @@ public class signUpActivity extends AppCompatActivity {
 
                 if(userAge < 18){
                     mCreateAccountbutton.setEnabled(false);
-                    Toast.makeText(signUpActivity.this,"Sorry You need to be over 18 to use Craft Watch",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(signUpActivity.this,"Sorry You need to be over 18 to use Craft Watch",Toast.LENGTH_LONG).show();
+                    mDisplayDate.setError("Sorry you need to be over 18 to use Craft Watch");
                 }
                 else {
                     mCreateAccountbutton.setEnabled(true);
@@ -106,10 +110,14 @@ public class signUpActivity extends AppCompatActivity {
         mCreateAccountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if(!passwordChecker(mpasswordInput.getText().toString())){
+            //if(!passwordChecker(mpasswordInput.getText().toString())){
 
-                mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
+                //mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
+            //}
+            if(!emailCheck(mEamilImput.getText().toString())){
+                mEamilImput.setError("Sorry that is not a valid Email Address");
             }
+
 
             }
         });
@@ -118,10 +126,11 @@ public class signUpActivity extends AppCompatActivity {
 
     }
     //To make sure the passworld is longer than six chars and has one speical charicater
-    public boolean passwordChecker(String pPasswWord){
-        Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
-        if(pPasswWord.length() >6){
-            Matcher hasSpecial = special.matcher(pPasswWord);
+
+    public boolean passwordChecker(String pPassWord){
+        Pattern special = Pattern.compile ("[!@#$£%&*()_+=|<>?{}\\[\\]~-]");
+        if(pPassWord.length() >6){
+            Matcher hasSpecial = special.matcher(pPassWord);
 
             return hasSpecial.find();
         }
@@ -131,14 +140,14 @@ public class signUpActivity extends AppCompatActivity {
 
     }
 
+    //Works out the user ages
 
-
-    private int calculateAge(String dobString){
+    private int calculateAge(String pDOBString){
 
         Date date = null;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            date = sdf.parse(dobString);
+            date = sdf.parse(pDOBString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -165,4 +174,14 @@ public class signUpActivity extends AppCompatActivity {
 
         return age;
     }
+    //Email Validation
+    private boolean emailCheck(String pEmail){
+
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+
+        return pattern.matcher(pEmail).matches();
+
+    }
+
+
 }
