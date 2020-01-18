@@ -82,4 +82,14 @@ public class inputValidation {
         return age;
     }
 
+    public boolean whiteSpaceCheck(String pInput){
+        if(pInput.trim().isEmpty()){
+            return false;
+        }
+        else {
+            
+            return true;
+        }
+    }
+
 }

@@ -31,6 +31,7 @@ public class signUpActivity extends AppCompatActivity {
     private TextView mDisplayDate;
     private TextView mpasswordInput;
     private TextView mEamilImput;
+    private TextView mfirstNameinput;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText dateOfBirthInput;
@@ -53,7 +54,8 @@ public class signUpActivity extends AppCompatActivity {
         mpasswordInput = (TextView) findViewById(R.id.signUpPasswordInput);
         //Input for Email
         mEamilImput = (TextView) findViewById(R.id.emailInput);
-
+        //input for firstname
+        mfirstNameinput = (TextView) findViewById(R.id.firstNameText);
 
 
        //All the input for the date
@@ -110,6 +112,10 @@ public class signUpActivity extends AppCompatActivity {
             }
             if(!inputValidation.getInstance().emailCheck(mEamilImput.getText().toString())){
                 mEamilImput.setError("Sorry that is not a valid Email Address");
+            }
+
+            if(!inputValidation.getInstance().whiteSpaceCheck(mfirstNameinput.getText().toString())){
+                mfirstNameinput.setError("Sorry this can not be blank");
             }
 
 
