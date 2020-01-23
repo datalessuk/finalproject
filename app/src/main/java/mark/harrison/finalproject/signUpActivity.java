@@ -1,8 +1,10 @@
 package mark.harrison.finalproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,9 +14,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,12 +51,23 @@ public class signUpActivity extends AppCompatActivity {
     int day ;
     String date;
     String pPasswordInput;
+    String mEmail;
+    String mPassword;
+    String mFirstname;
+    String mLastName;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        mAuth = FirebaseAuth.getInstance();
+       // if(mAuth.getCurrentUser() !=null){
+            //startActivity(new Intent(getApplicationContext(),homeScreen.class));
+        //}
+
 
         //Input for password
         mpasswordInput = (TextView) findViewById(R.id.signUpPasswordInput);
@@ -110,12 +129,54 @@ public class signUpActivity extends AppCompatActivity {
 
                 mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
             }
+            else {
+                mPassword = mpasswordInput.getText().toString();
+            }
             if(!inputValidation.getInstance().emailCheck(mEamilImput.getText().toString())){
+                mEmail = null;
                 mEamilImput.setError("Sorry that is not a valid Email Address");
+            }
+            else {
+                mEmail = mEamilImput.getText().toString();
             }
 
             if(!inputValidation.getInstance().whiteSpaceCheck(mfirstNameinput.getText().toString())){
-                mfirstNameinput.setError("Sorry this can not be blank");
+                mfirstNameinput.setError("Please enter your first name");
+            }
+            else {
+                mFirstname= mfirstNameinput.getText().toString();
+            }
+
+
+
+            if(mEmail ==null || mPassword ==null){
+
+            }
+            else {
+                mAuth.createUserWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            User user = new User(mFirstname,mEmail,mPassword);
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference myRef = database.getReference("User");
+                            myRef.setValue(user);
+                            /*FirebaseDatabase.getInstance().getReference().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(signUpActivity.this,"Added To databasse",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });*/
+
+                            //Toast.makeText(signUpActivity.this,"User Made",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),homeScreen.class));
+                        }
+
+                    }
+                });
+
             }
 
 
