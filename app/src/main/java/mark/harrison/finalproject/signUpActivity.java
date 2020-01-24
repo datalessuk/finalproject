@@ -40,6 +40,7 @@ public class signUpActivity extends AppCompatActivity {
     private TextView mpasswordInput;
     private TextView mEamilImput;
     private TextView mfirstNameinput;
+    private TextView mlastNameInput;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText dateOfBirthInput;
@@ -77,6 +78,9 @@ public class signUpActivity extends AppCompatActivity {
         mEamilImput = (TextView) findViewById(R.id.emailInput);
         //input for firstname
         mfirstNameinput = (TextView) findViewById(R.id.firstNameText);
+
+        mlastNameInput = (TextView) findViewById(R.id.lastNameText);
+
 
 
        //All the input for the date
@@ -148,7 +152,11 @@ public class signUpActivity extends AppCompatActivity {
             else {
                 mFirstname= mfirstNameinput.getText().toString();
             }
-
+                if (!inputValidation.getInstance().whiteSpaceCheck(mlastNameInput.getText().toString())) {
+                    mlastNameInput.setError("Please Enter Your last name");
+                }else {
+                    mLastName = mlastNameInput.getText().toString();
+                }
 
 
             if(mEmail ==null || mPassword ==null){//Change this
@@ -159,7 +167,7 @@ public class signUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(mFirstname,mEmail,mPassword);
+                            User user = new User(mFirstname,mLastName,mEmail,mPassword);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("User");

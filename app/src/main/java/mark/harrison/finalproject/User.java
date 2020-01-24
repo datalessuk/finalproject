@@ -10,9 +10,9 @@ public class User {
 
     }
 
-    public User(String pFirstName,String pEmail,String pPassword){
+    public User(String pFirstName,String pLastname,String pEmail,String pPassword){
         this.mFirstName = pFirstName;
-        //this.mLastName = pLastname;
+        this.mLastName = pLastname;
         this.mEmail = pEmail;
         this.mPassword = pPassword;
     }
