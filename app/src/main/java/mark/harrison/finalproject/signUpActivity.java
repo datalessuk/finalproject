@@ -59,6 +59,8 @@ public class signUpActivity extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,6 +160,7 @@ public class signUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             User user = new User(mFirstname,mEmail,mPassword);
+
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("User");
 
@@ -171,7 +174,7 @@ public class signUpActivity extends AppCompatActivity {
                                 }
                             });*/
 
-                            //Toast.makeText(signUpActivity.this,"User Made",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signUpActivity.this,"User Made",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),homeScreen.class));
                         }
 
