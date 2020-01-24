@@ -1,8 +1,10 @@
 package mark.harrison.finalproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -74,7 +76,16 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(),homeScreen.class));
                             }
                             else {
-                                Toast.makeText(MainActivity.this,"Sorry you",Toast.LENGTH_SHORT).show();
+                                //Add Dialog box
+                                AlertDialog.Builder noAccountDialog = new AlertDialog.Builder(MainActivity.this);
+                                noAccountDialog.setTitle("Error").setMessage("Sorry we can not find your account, please try again or if you don't have an account please sign up").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                }).show();
+
+
                             }
                         }
                     });
