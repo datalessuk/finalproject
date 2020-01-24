@@ -64,7 +64,7 @@ public class signUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
-       // if(mAuth.getCurrentUser() !=null){
+       // if(mAuth.getCurrentUser() !=null){ // if user is logged in
             //startActivity(new Intent(getApplicationContext(),homeScreen.class));
         //}
 
@@ -149,8 +149,8 @@ public class signUpActivity extends AppCompatActivity {
 
 
 
-            if(mEmail ==null || mPassword ==null){
-
+            if(mEmail ==null || mPassword ==null){//Change this
+            Toast.makeText(signUpActivity.this,"Sorry",Toast.LENGTH_SHORT).show();
             }
             else {
                 mAuth.createUserWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -160,7 +160,8 @@ public class signUpActivity extends AppCompatActivity {
                             User user = new User(mFirstname,mEmail,mPassword);
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("User");
-                            myRef.setValue(user);
+
+                            myRef.push().setValue(user);
                             /*FirebaseDatabase.getInstance().getReference().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
