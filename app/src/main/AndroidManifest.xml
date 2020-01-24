@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".homeScreen"></activity>
         <activity android:name=".signUpActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

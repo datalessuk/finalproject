@@ -17,9 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.w3c.dom.Text;
-
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView mEmail;
     private TextView mPassword;
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 // end of input Validation
 
                 if(mEmailInput ==null || mPasswordInput ==null ){//Dont like
-                    Toast.makeText(MainActivity.this,"Sorry ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Sorry ",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mAuth.signInWithEmailAndPassword(mEmailInput,mPasswordInput).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else {
                                 //Add Dialog box
-                                AlertDialog.Builder noAccountDialog = new AlertDialog.Builder(MainActivity.this);
+                                AlertDialog.Builder noAccountDialog = new AlertDialog.Builder(LoginActivity.this);
                                 noAccountDialog.setTitle("Error").setMessage("Sorry we can not find your account, please try again or if you don't have an account please sign up").setPositiveButton("ok", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
