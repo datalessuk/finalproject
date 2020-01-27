@@ -188,10 +188,10 @@ public class signUpActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             User user = new User(mFirstname,mLastName,mEmail);
 
+                            myRef.child(mLastName).setValue(user);
 
 
-
-                            myRef.child(String.valueOf(mMaxId+1)).setValue(user);
+                            //myRef.child(String.valueOf(mMaxId+1)).setValue(user);
 
 
 
