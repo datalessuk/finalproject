@@ -21,8 +21,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -56,6 +59,9 @@ public class signUpActivity extends AppCompatActivity {
     String mPassword;
     String mFirstname;
     String mLastName;
+    long mMaxId;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("User");
 
 
 
@@ -79,6 +85,21 @@ public class signUpActivity extends AppCompatActivity {
 
         mlastNameInput = (TextView) findViewById(R.id.lastNameText);
 
+        //Event for when data is added to the data base
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    mMaxId=(dataSnapshot.getChildrenCount());
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+    });
 
 
        //All the input for the date
@@ -167,18 +188,12 @@ public class signUpActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             User user = new User(mFirstname,mLastName,mEmail);
 
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("User");
 
-                            myRef.push().setValue(user);
-                            /*FirebaseDatabase.getInstance().getReference().child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(signUpActivity.this,"Added To databasse",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });*/
+
+
+                            myRef.child(String.valueOf(mMaxId+1)).setValue(user);
+
+
 
                             Toast.makeText(signUpActivity.this,"User Made",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(),homeScreen.class));
