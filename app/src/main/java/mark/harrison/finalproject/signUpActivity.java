@@ -67,9 +67,7 @@ public class signUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
-       // if(mAuth.getCurrentUser() !=null){ // if user is logged in
-            //startActivity(new Intent(getApplicationContext(),homeScreen.class));
-        //}
+
 
 
         //Input for password
@@ -167,7 +165,7 @@ public class signUpActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            User user = new User(mFirstname,mLastName,mEmail,mPassword);
+                            User user = new User(mFirstname,mLastName,mEmail);
 
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference myRef = database.getReference("User");

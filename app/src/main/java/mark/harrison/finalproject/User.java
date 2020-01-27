@@ -4,17 +4,17 @@ public class User {
     private String mFirstName;
     private String mLastName;
     private String mEmail;
-    private String mPassword;
+
 
     public User(){
 
     }
 
-    public User(String pFirstName,String pLastname,String pEmail,String pPassword){
+    public User(String pFirstName,String pLastname,String pEmail){
         this.mFirstName = pFirstName;
         this.mLastName = pLastname;
         this.mEmail = pEmail;
-        this.mPassword = pPassword;
+
     }
 
 
@@ -45,13 +45,7 @@ public class User {
         this.mEmail = mEmail;
     }
 
-    public String getmPassword() {
-        return mPassword;
-    }
 
-    public void setmPassword(String mPassword) {
-        this.mPassword = mPassword;
-    }
 
 
 

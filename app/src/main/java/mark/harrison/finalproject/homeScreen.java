@@ -12,7 +12,6 @@ public class homeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        TextView welcomeText = (TextView) findViewById(R.id.textView2);
-        welcomeText.setText("Boo");
+
     }
 }

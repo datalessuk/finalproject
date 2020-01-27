@@ -9,4 +9,5 @@
     <string name="SignUp">CREATE ACCOUNT</string>
     <string name="actionbarCreate">Create Account</string>
     <string name="signinbutton">SIGN IN</string>
+    <string name="maintitle">Craft Watch</string>
 </resources>
