@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,12 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class signUpActivity extends AppCompatActivity {
@@ -43,7 +37,7 @@ public class signUpActivity extends AppCompatActivity {
     private TextView mpasswordInput;
     private TextView mEamilImput;
     private TextView mfirstNameinput;
-    private TextView mlastNameInput;
+    private TextView mUserNameinput;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText dateOfBirthInput;
@@ -58,8 +52,9 @@ public class signUpActivity extends AppCompatActivity {
     String mEmail;
     String mPassword;
     String mFirstname;
-    String mLastName;
-    long mMaxId;
+    String mUserName;
+
+    String tempUsername;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("User");
 
@@ -83,23 +78,11 @@ public class signUpActivity extends AppCompatActivity {
         //input for firstname
         mfirstNameinput = (TextView) findViewById(R.id.firstNameText);
 
-        mlastNameInput = (TextView) findViewById(R.id.lastNameText);
+        mUserNameinput = (TextView) findViewById(R.id.userNameText);
 
         //Event for when data is added to the data base
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    mMaxId=(dataSnapshot.getChildrenCount());
-                }
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-    });
 
 
        //All the input for the date
@@ -146,11 +129,18 @@ public class signUpActivity extends AppCompatActivity {
             }
         };
 
+
+
+
         mCreateAccountbutton = findViewById(R.id.createAccount);
         mCreateAccountbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if(!inputValidation.getInstance().passwordChecker(mpasswordInput.getText().toString())){
+
+
+
+
+                if(!inputValidation.getInstance().passwordChecker(mpasswordInput.getText().toString())){
 
                 mpasswordInput.setError("Sorry your password has to be longer than 6 with one special character"); // Working
             }
@@ -171,38 +161,72 @@ public class signUpActivity extends AppCompatActivity {
             else {
                 mFirstname= mfirstNameinput.getText().toString();
             }
-                if (!inputValidation.getInstance().whiteSpaceCheck(mlastNameInput.getText().toString())) {
-                    mlastNameInput.setError("Please Enter Your last name");
+                if (!inputValidation.getInstance().whiteSpaceCheck(mUserNameinput.getText().toString())) {
+                    mUserNameinput.setError("Please enter a Username");
                 }else {
-                    mLastName = mlastNameInput.getText().toString();
+                    mUserName = mUserNameinput.getText().toString();
+
+                    tempUsername =mUserName;
+                }
+
+                if(tempUsername ==null){
+
+                }else {
+                    myRef.child(tempUsername);
+                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.hasChild(mUserName)){
+
+                                mUserNameinput.setError("Sorry that user name is taken");
+                            }
+                            else {
+                                if(mEmail ==null || mPassword ==null||mUserName ==null){//Change this
+                                    Toast.makeText(signUpActivity.this,"Sorry",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    mAuth.createUserWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                            if(!task.isSuccessful()){
+                                                Toast.makeText(signUpActivity.this,"test",Toast.LENGTH_SHORT).show();
+
+
+                                            }
+                                            else {
+                                                User user = new User(mFirstname,mUserName,mEmail);
+
+                                                myRef.child(mUserName).setValue(user);
+
+
+                                                //myRef.child(String.valueOf(mMaxId+1)).setValue(user);
+
+
+
+                                                Toast.makeText(signUpActivity.this,"User Made",Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(getApplicationContext(),homeScreen.class));
+                                            }
+                                        }
+                                    });
+
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
 
 
-            if(mEmail ==null || mPassword ==null){//Change this
-            Toast.makeText(signUpActivity.this,"Sorry",Toast.LENGTH_SHORT).show();
-            }
-            else {
-                mAuth.createUserWithEmailAndPassword(mEmail,mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            User user = new User(mFirstname,mLastName,mEmail);
-
-                            myRef.child(mLastName).setValue(user);
-
-
-                            //myRef.child(String.valueOf(mMaxId+1)).setValue(user);
 
 
 
-                            Toast.makeText(signUpActivity.this,"User Made",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),homeScreen.class));
-                        }
 
-                    }
-                });
 
-            }
 
 
             }

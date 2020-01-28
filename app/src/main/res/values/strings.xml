@@ -10,4 +10,5 @@
     <string name="actionbarCreate">Create Account</string>
     <string name="signinbutton">SIGN IN</string>
     <string name="maintitle">Craft Watch</string>
+    <string name="username">User Name</string>
 </resources>

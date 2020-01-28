@@ -2,7 +2,7 @@ package mark.harrison.finalproject;
 
 public class User {
     private String mFirstName;
-    private String mLastName;
+    private String mUserName;
     private String mEmail;
 
 
@@ -12,7 +12,7 @@ public class User {
 
     public User(String pFirstName,String pLastname,String pEmail){
         this.mFirstName = pFirstName;
-        this.mLastName = pLastname;
+        this.mUserName = pLastname;
         this.mEmail = pEmail;
 
     }
@@ -29,12 +29,12 @@ public class User {
 
 
 
-    public String getmLastName() {
-        return mLastName;
+    public String getmUserName() {
+        return mUserName;
     }
 
-    public void setmLastName(String mLastName) {
-        this.mLastName = mLastName;
+    public void setmUserName(String mUserName) {
+        this.mUserName = mUserName;
     }
 
     public String getmEmail() {
