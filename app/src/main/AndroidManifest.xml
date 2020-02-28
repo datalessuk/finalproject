@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".beerInformation"></activity>
+        <activity android:name=".createBeer"></activity>
+        <activity android:name=".allBeers" />
+        <activity android:name=".beerInformation" />
         <activity android:name=".homeScreen" />
         <activity android:name=".signUpActivity" />
         <activity android:name=".LoginActivity">
