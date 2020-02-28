@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class homeScreen extends AppCompatActivity {
 
     Button mBeerButton;
+    Button mBeerButtonTwo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,15 @@ public class homeScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),beerInformation.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        mBeerButtonTwo = (Button)findViewById(R.id.beerInfoButton2);
+        mBeerButtonTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),createBeer.class);
                 view.getContext().startActivity(intent);
             }
         });
