@@ -16,14 +16,14 @@ public class homeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        /*mBeerButton = (Button)findViewById(R.id.beerInfoButton);
+        mBeerButton = (Button)findViewById(R.id.beerInfoButton);
         mBeerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),beerInformation.class);
+                Intent intent = new Intent(view.getContext(),allBeers.class);
                 view.getContext().startActivity(intent);
             }
-        });*/
+        });
 
         mBeerButtonTwo = (Button)findViewById(R.id.createBeerButton);
         mBeerButtonTwo.setOnClickListener(new View.OnClickListener() {

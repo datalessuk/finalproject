@@ -34,8 +34,8 @@ public class createBeer extends AppCompatActivity {
     String mBrewery;
     String mBarcode;
 
-    FirebaseDatabase database2 = FirebaseDatabase.getInstance();
-    DatabaseReference myRef2 = database2.getReference("Beers");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Beers");
 
 
     //mDatabase = FirebaseDatabase.getInstance();
@@ -65,7 +65,7 @@ public class createBeer extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                myRef2.addListenerForSingleValueEvent(new ValueEventListener() {
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -76,7 +76,7 @@ public class createBeer extends AppCompatActivity {
 
                         Beers beers = new Beers(mBeername,mBrewery,mBarcode);
                         //myRef2.setValue(beers);
-                        myRef2.child("Kiss").setValue(beers);
+                        myRef.child(mBeername).setValue(beers);
 
 
                     }
