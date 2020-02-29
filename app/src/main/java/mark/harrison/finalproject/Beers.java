@@ -20,29 +20,29 @@ public class Beers {
         this.mBrewery = mBrewery;
     }
 
-    public int getmStock() {
-        return mStock;
-    }
+    //public int getmStock() {
+        //return mStock;
+    //}
 
-    public void setmStock(int mStock) {
-        this.mStock = mStock;
-    }
+    //public void setmStock(int mStock) {
+      //  this.mStock = mStock;
+    //}
 
-    public long getmBarcode() {
+    public String getmBarcode() {
         return mBarcode;
     }
 
-    public void setmBarcode(long mBarcode) {
+    public void setmBarcode(String mBarcode) {
         this.mBarcode = mBarcode;
     }
 
-    public long getmReview() {
-        return mReview;
-    }
+    //public long getmReview() {
+      //  return mReview;
+    //}
 
-    public void setmReview(long mReview) {
-        this.mReview = mReview;
-    }
+   // public void setmReview(long mReview) {
+        //this.mReview = mReview;
+    //}
 
     public String getmFlavours() {
         return mFlavours;
@@ -68,27 +68,29 @@ public class Beers {
         this.mPhoto = mPhoto;
     }
 
-    public short getmPercentage() {
-        return mPercentage;
-    }
-
-    public void setmPercentage(short mPercentage) {
-        this.mPercentage = mPercentage;
-    }
 
     private String mName;
     private String mBrewery;
-    private int mStock;
-    private long mBarcode;
-    private long mReview;
+    //private int mStock;
+    private String mBarcode;
+    //private long mReview;
     private String mFlavours;
     private String mBeerInformation;
     private Bitmap mPhoto;
-    private short mPercentage;
+
 
     public Beers(){
     }
 
+    public Beers(String pName,String pBrewery,String pBarcode){
+        this.mName = pName;
+        this.mBrewery = pBrewery;
+        this.mBarcode = pBarcode;
+    }
 
+    //public Beers(String pName,String pBrewery){
+        //this.mName = pName;
+        //this.mBrewery = pBrewery;
+    //}
 
 }

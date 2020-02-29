@@ -56,7 +56,7 @@ public class signUpActivity extends AppCompatActivity {
 
     String tempUsername;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("User");
+    DatabaseReference myRef = database.getReference("Users");
 
 
 
