@@ -11,12 +11,13 @@ public class homeScreen extends AppCompatActivity {
 
     Button mBeerButton;
     Button mBeerButtonTwo;
+    Button mBeerButtonThree;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        mBeerButton = (Button)findViewById(R.id.beerInfoButton);
+        mBeerButton = (Button)findViewById(R.id.cameraButton);
         mBeerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,6 +35,14 @@ public class homeScreen extends AppCompatActivity {
             }
         });
 
+        mBeerButtonThree = (Button)findViewById(R.id.cameraButton);
+        mBeerButtonThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),cameraActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
 
     }
 

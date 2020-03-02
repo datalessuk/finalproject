@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.vision.barcode.Barcode;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -53,8 +54,9 @@ public class createBeer extends AppCompatActivity {
         beerBrewery = (TextView)findViewById(R.id.beweryText);
         beerBarcode = (TextView)findViewById(R.id.barcodeText);
 
-
-
+        final Barcode barcode = getIntent().getParcelableExtra("barcode");
+        //beerBarcode.setText(barcode.displayValue);
+        beerBarcode.setText(barcode.displayValue);
 
         mCreateBeerButton = findViewById(R.id.createBeerButton);
         mCreateBeerButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +75,7 @@ public class createBeer extends AppCompatActivity {
                         mBeername = beerName.getText().toString();
                         mBrewery = beerBrewery.getText().toString();
                         mBarcode = beerBarcode.getText().toString();
+
 
                         Beers beers = new Beers(mBeername,mBrewery,mBarcode);
                         //myRef2.setValue(beers);
