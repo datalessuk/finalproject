@@ -18,29 +18,5 @@
         tools:layout_editor_absoluteX="26dp"
         tools:layout_editor_absoluteY="83dp" />
 
-    <Button
-        android:id="@+id/openBeerCreate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="ADD CONTENT IN THE MAIL" />
-
-    <TextView
-        android:id="@+id/txtBarcodeValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="No Barcode Detected"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="661dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

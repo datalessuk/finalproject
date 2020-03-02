@@ -53,20 +53,7 @@ public class cameraActivity extends AppCompatActivity {
         cameraPreview = (SurfaceView) findViewById(R.id.surfaceView);
         //txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
 
-        acceptBarcodeButton = findViewById(R.id.openBeerCreate);
-        acceptBarcodeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(intentData.length()>0){
-                    if(isBarcode){
-                        //startActivity(new Intent(cameraActivity.this,createBeer.class).putExtra("barcode",barcode));
-                        //Intent intent = new Intent(cameraActivity.this,createBeer.class);
-                        //intent.putExtra("barcode",intentData.)
-                    }
-                // startActivity(new Intent(ScannedBarcodeActivity.this, EmailActivity.class).putExtra("email_address", intentData));
-                }
-            }
-        });
+
 
 
         barcodeDetector = new BarcodeDetector.Builder(this)
@@ -120,13 +107,7 @@ public class cameraActivity extends AppCompatActivity {
             final SparseArray<Barcode> barcodes = detections.getDetectedItems();
                 if(barcodes.size() !=0){
 
-                    //txtBarcodeValue.post(new Runnable() {
 
-
-                                //intentData = barcodes.valueAt(0).displayValue;
-                                //txtBarcodeValue.setText(intentData);
-                                //barcode = intentData;
-                                //isBarcode = true;
                             Intent intent = new Intent(cameraActivity.this, createBeer.class);
                             intent.putExtra("barcode", barcodes.valueAt(0));
                             startActivityForResult(intent, 100);
