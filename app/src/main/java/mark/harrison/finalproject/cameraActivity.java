@@ -27,6 +27,8 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.CameraSource;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import android.os.Bundle;
@@ -36,15 +38,14 @@ import java.io.IOException;
 
 public class cameraActivity extends AppCompatActivity {
 
+
+
     SurfaceView cameraPreview;
-    TextView txtBarcodeValue;
+
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
-    Button acceptBarcodeButton;
-    String intentData = "";
-    boolean isBarcode = false;
-    String barcode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
