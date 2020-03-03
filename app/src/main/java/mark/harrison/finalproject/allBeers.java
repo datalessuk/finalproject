@@ -51,8 +51,7 @@ public class allBeers extends AppCompatActivity {
                 //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
                     String txt = beers.getmBarcode() + " : " + beers.getmBrewery() + " : " + beers.getmName();
-                    //beerstwo beers = snapshot.getValue(beerstwo.class);
-                    //String txt = beers.getBarcode() + beers.getName() + beers.getBrewery();
+
                     arrayAdapter.add(txt);
                 }
             arrayAdapter.notifyDataSetChanged();
