@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -13,8 +14,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class allBeers extends AppCompatActivity {
 
@@ -31,34 +34,23 @@ public class allBeers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_beers);
 
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Beers");
+        //database = FirebaseDatabase.getInstance();
+        //myRef = database.getReference("Beers");
+        DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers");
 
         listView =(ListView)findViewById(R.id.allBeersList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mAllBeers);
         listView.setAdapter(arrayAdapter);
-        myRef.addChildEventListener(new ChildEventListener() {
+
+
+        Reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String value = dataSnapshot.getValue(String.class);
-                mAllBeers.add(value);
-                arrayAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayAdapter.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                arrayAdapter.add(snapshot.getValue().toString());
+                }
+            arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -66,6 +58,7 @@ public class allBeers extends AppCompatActivity {
 
             }
         });
+
 
     }
 }

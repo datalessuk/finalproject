@@ -23,8 +23,10 @@
         android:id="@+id/allBeersList"
         android:layout_width="398dp"
         android:layout_height="641dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="29dp">
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="34dp">
 
     </ListView>
 
