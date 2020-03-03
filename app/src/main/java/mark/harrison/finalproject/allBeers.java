@@ -41,7 +41,7 @@ public class allBeers extends AppCompatActivity {
         listView =(ListView)findViewById(R.id.allBeersList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mAllBeers);
         listView.setAdapter(arrayAdapter);
-        //arrayAdapter.clear();
+        arrayAdapter.clear();
 
         Reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -50,8 +50,8 @@ public class allBeers extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                 //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
-                    String txt = beers.getmBarcode() + " : " + beers.getmBrewery() + " : " + beers.getmName();
-
+                    String txt = beers.getmBrewery() + "  " + beers.getmName();
+                    //String txt = beers.getmName();
                     arrayAdapter.add(txt);
                 }
             arrayAdapter.notifyDataSetChanged();

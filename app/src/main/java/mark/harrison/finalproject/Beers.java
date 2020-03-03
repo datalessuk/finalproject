@@ -80,7 +80,10 @@ public class Beers {
 
 
     public Beers(){
+
     }
+
+
 
     public Beers(String pName,String pBrewery,String pBarcode){
         this.mName = pName;

@@ -51,20 +51,24 @@ public class createBeer extends AppCompatActivity {
         beerBreweryInput = (TextView)findViewById(R.id.beweryText);
         beerBarcodeInput = (TextView)findViewById(R.id.barcodeText);
 
-        final Barcode barcode = getIntent().getParcelableExtra("barcode");
-        //beerBarcodeInput.setText(barcode.displayValue);
-        beerBarcodeInput.setText(barcode.displayValue);
 
-        if(!inputValidation.getInstance().whiteSpaceCheck(beerNameInput.getText().toString())){
-            beerNameInput.setError("Sorry this can not be blank");
 
-        }
-        else{
-            mBeername = beerNameInput.getText().toString();
-        }
+            final Barcode barcode = getIntent().getParcelableExtra("barcode");
+            //beerBarcodeInput.setText(barcode.displayValue);
+            beerBarcodeInput.setText(barcode.displayValue);
 
-        mBrewery = beerBreweryInput.getText().toString();//Add For this
-        mBarcode = beerBarcodeInput.getText().toString();
+
+
+        //if(!inputValidation.getInstance().whiteSpaceCheck(beerNameInput.getText().toString())){
+            //beerNameInput.setError("Sorry this can not be blank");
+
+
+
+
+
+
+
+
 
         //Button Event
         mCreateBeerButton = findViewById(R.id.createBeerButton);
@@ -75,6 +79,9 @@ public class createBeer extends AppCompatActivity {
 
             @Override
             public void onClick(final View view) {
+                mBeername = beerNameInput.getText().toString();
+                mBrewery = beerBreweryInput.getText().toString();
+                mBarcode = beerBarcodeInput.getText().toString();
 
 
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -92,7 +99,10 @@ public class createBeer extends AppCompatActivity {
 
                             Beers beers = new Beers(mBeername,mBrewery,mBarcode);
                             //myRef2.setValue(beers);
+                            Toast.makeText(createBeer.this,"Beer Added to database",Toast.LENGTH_SHORT).show();
                             myRef.child(mBarcode).setValue(beers);
+                            Intent intent = new Intent(createBeer.this, homeScreen.class);
+                            view.getContext().startActivity(intent);
                         }
 
 
