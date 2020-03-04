@@ -31,6 +31,10 @@ public class createBeer extends AppCompatActivity {
     String mBeername;
     String mBrewery;
     String mBarcode;
+    //None user inputed yet ?
+    int mStock;
+    String mFlavours ="";
+    String mReview="";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Beers");
@@ -97,9 +101,11 @@ public class createBeer extends AppCompatActivity {
 
 
 
-                            Beers beers = new Beers(mBeername,mBrewery,mBarcode);
+                            Beers beers = new Beers(mBeername,mBrewery,mBarcode,mStock,mReview,mFlavours);
                             //myRef2.setValue(beers);
-                            Toast.makeText(createBeer.this,"Beer Added to database",Toast.LENGTH_SHORT).show();
+
+
+                            Toast.makeText(createBeer.this,"Beer has been created thank you",Toast.LENGTH_SHORT).show();
                             myRef.child(mBarcode).setValue(beers);
                             Intent intent = new Intent(createBeer.this, homeScreen.class);
                             view.getContext().startActivity(intent);
