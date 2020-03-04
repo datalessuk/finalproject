@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,8 +38,7 @@ public class allBeers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_beers);
 
-        //database = FirebaseDatabase.getInstance();
-        //myRef = database.getReference("Beers");
+
         DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers");
 
         listView =(ListView)findViewById(R.id.allBeersList);
@@ -53,9 +53,9 @@ public class allBeers extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                 //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
-                    String txt = beers.getmBrewery() + "  " + beers.getmName();
-                    //String txt = beers.getmName();
-                    arrayAdapter.add(txt);
+                    String beerClass = beers.getmBrewery() + "  " + beers.getmName();
+
+                    arrayAdapter.add(beerClass);
                 }
             arrayAdapter.notifyDataSetChanged();
             }
@@ -69,7 +69,8 @@ public class allBeers extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(allBeers.this,"Test",Toast.LENGTH_SHORT).show();
-                
+                Intent intent = new Intent(allBeers.this,beerInformation.class);
+                startActivity(intent);
             }
         });
 
