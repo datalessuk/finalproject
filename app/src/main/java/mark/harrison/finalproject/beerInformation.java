@@ -19,9 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 public class beerInformation extends AppCompatActivity {
 
     //Database Reference
-    DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers");
+    //DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers");
     //DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers")
     //Textviews
+
+    DatabaseReference zonesRef = FirebaseDatabase.getInstance().getReference("Beers");
+    DatabaseReference zone1Ref = zonesRef.child("5010038460160");
+    DatabaseReference zone1NameRef = zone1Ref.child("mName");
+    DatabaseReference zone2 =  zone1Ref.child("mBrewery");
     TextView mBeername;
 
 
@@ -31,13 +36,15 @@ public class beerInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beer_information);
 
-        mBeername = (TextView)findViewById(R.id.beerNameText);
-        Reference.addValueEventListener(new ValueEventListener() {
+        mBeername = (TextView)findViewById(R.id.BeerNameText);
+        zone1NameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String beerName = dataSnapshot.child("5010038460160").getValue().toString();
+                //String beerName = dataSnapshot.child("5010038460160").getValue().toString();
+                String beerName = dataSnapshot.getValue(String.class);
                 //String b = dataSnapshot.child("5010038460160").getValue().toString();
                 mBeername.setText(beerName);
+                Toast.makeText(beerInformation.this,beerName ,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -45,7 +52,18 @@ public class beerInformation extends AppCompatActivity {
 
             }
         });
+        zone2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String beerBrewery = dataSnapshot.getValue(String.class);
+                Toast.makeText(beerInformation.this,beerBrewery,Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
