@@ -39,7 +39,9 @@ public class createBeer extends AppCompatActivity {
     String mPercentage;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Beers");
+    DatabaseReference myRef = database.getReference("Beers");// For the main beer class
+
+    DatabaseReference myRefRewview = database.getReference("Reviews");
 
 
     //mDatabase = FirebaseDatabase.getInstance();
@@ -105,7 +107,7 @@ public class createBeer extends AppCompatActivity {
                                 //
 
                             Beers beers = new Beers(mBeername,mBrewery,mBarcode,mStock,mFlavours,mPercentage);
-                            //beerReviews beerReviews = new beerReviews();
+
                             //myRef2.setValue(beers);
 
 
@@ -124,9 +126,22 @@ public class createBeer extends AppCompatActivity {
 
                     }
                 });
+                myRefRewview.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        beerReviews beerReviews = new beerReviews(mReview);
+                        myRefRewview.child(mBarcode).setValue(beerReviews);
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
+
+
         });
 
 
