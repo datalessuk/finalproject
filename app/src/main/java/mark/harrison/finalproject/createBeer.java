@@ -27,6 +27,7 @@ public class createBeer extends AppCompatActivity {
     private TextView beerNameInput;
     private TextView beerBreweryInput;
     private TextView beerBarcodeInput;
+    private TextView beerPercentageInput;
     //Varible inputs
     String mBeername;
     String mBrewery;
@@ -35,6 +36,7 @@ public class createBeer extends AppCompatActivity {
     int mStock;
     String mFlavours ="";
     String mReview="";
+    String mPercentage;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Beers");
@@ -54,6 +56,7 @@ public class createBeer extends AppCompatActivity {
         beerNameInput = (TextView) findViewById(R.id.beerNameText);
         beerBreweryInput = (TextView)findViewById(R.id.beweryText);
         beerBarcodeInput = (TextView)findViewById(R.id.barcodeText);
+        beerPercentageInput = (TextView)findViewById(R.id.percentageText);
 
 
 
@@ -86,6 +89,7 @@ public class createBeer extends AppCompatActivity {
                 mBeername = beerNameInput.getText().toString();
                 mBrewery = beerBreweryInput.getText().toString();
                 mBarcode = beerBarcodeInput.getText().toString();
+                mPercentage = beerPercentageInput.getText().toString();
 
 
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -98,10 +102,10 @@ public class createBeer extends AppCompatActivity {
                             view.getContext().startActivity(intent);
                         }
                         else {
+                                //
 
-
-
-                            Beers beers = new Beers(mBeername,mBrewery,mBarcode,mStock,mReview,mFlavours);
+                            Beers beers = new Beers(mBeername,mBrewery,mBarcode,mStock,mFlavours,mPercentage);
+                            //beerReviews beerReviews = new beerReviews();
                             //myRef2.setValue(beers);
 
 

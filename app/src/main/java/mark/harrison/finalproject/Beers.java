@@ -36,13 +36,7 @@ public class Beers {
         this.mBarcode = mBarcode;
     }
 
-    public String getmReview() {
-        return mReview;
-    }
 
-    public void setmReview(String mReview) {
-        this.mReview = mReview;
-    }
 
     public String getmFlavours() {
         return mFlavours;
@@ -52,21 +46,13 @@ public class Beers {
         this.mFlavours = mFlavours;
     }
 
-    //public String getmBeerInformation() {
-        //return mBeerInformation;
-    //}
+    public String getmPercentage() {
+        return mPercentage;
+    }
 
-    //public void setmBeerInformation(String mBeerInformation) {
-        //this.mBeerInformation = mBeerInformation;
-    //}
-
-    //public Bitmap getmPhoto() {
-        //return mPhoto;
-    //}
-
-    //public void setmPhoto(Bitmap mPhoto) {
-        //this.mPhoto = mPhoto;
-    //}
+    public void setmPercentage(String mPercentage) {
+        this.mPercentage = mPercentage;
+    }
 
 
     private String mName;
@@ -75,9 +61,10 @@ public class Beers {
     private String mBarcode;
     private String mReview;
     private String mFlavours;
-    //private String mBeerInformation;
-    //private Bitmap mPhoto;
 
+
+
+    private String mPercentage;
 
     public Beers(){
 
@@ -92,13 +79,13 @@ public class Beers {
     }
 
 
-    public Beers(String pName,String pBrewery,String pBarcode,int pStock,String pReview,String pFlavours){
+    public Beers(String pName,String pBrewery,String pBarcode,int pStock,String pFlavours,String pPercentage){
         this.mName = pName;
         this.mBrewery = pBrewery;
         this.mBarcode = pBarcode;
         this.mStock = pStock;
-        this.mReview = pReview;
         this.mFlavours = pFlavours;
+        this.mPercentage = pPercentage;
     }
 
 
