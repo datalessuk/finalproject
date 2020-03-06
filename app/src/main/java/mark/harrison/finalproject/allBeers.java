@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class allBeers extends AppCompatActivity {
@@ -32,6 +33,12 @@ public class allBeers extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     ArrayList<String> mAllBeers = new ArrayList<>();
+    String beerCode;
+
+
+
+    List listA = new ArrayList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,7 @@ public class allBeers extends AppCompatActivity {
 
 
         DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers");
+        //DatabaseReference zone1Ref = Reference.child(beerCode);
 
         listView =(ListView)findViewById(R.id.allBeersList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mAllBeers);
@@ -52,10 +60,25 @@ public class allBeers extends AppCompatActivity {
                 //arrayAdapter.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                 //arrayAdapter.add(snapshot.getValue().toString());
-                    Beers beers = snapshot.getValue(Beers.class);
+                    final Beers beers = snapshot.getValue(Beers.class);
                     String beerClass = beers.getmBrewery() + "  " + beers.getmName();
 
                     arrayAdapter.add(beerClass);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            //Toast.makeText(allBeers.this,"Test",Toast.LENGTH_SHORT).show();
+                            //Intent intent = new Intent(allBeers.this,beerInformation.class);
+                            //startActivity(intent);
+                            //beerCode = position
+
+                            Toast.makeText(allBeers.this,beers.getmBarcode() + " " + position,Toast.LENGTH_SHORT).show();
+
+
+                        }
+                    });
+
                 }
             arrayAdapter.notifyDataSetChanged();
             }
@@ -65,14 +88,7 @@ public class allBeers extends AppCompatActivity {
 
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(allBeers.this,"Test",Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(allBeers.this,beerInformation.class);
-                startActivity(intent);
-            }
-        });
+
 
     }
 }
