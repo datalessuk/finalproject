@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.vision.barcode.Barcode;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,9 @@ public class beerInformation extends AppCompatActivity {
     //DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers")
     //Textviews
 
+
+
+
     DatabaseReference zonesRef = FirebaseDatabase.getInstance().getReference("Beers");
     DatabaseReference zone1Ref = zonesRef.child("5010038460160");
     DatabaseReference zone1NameRef = zone1Ref.child("mName");
@@ -30,10 +34,24 @@ public class beerInformation extends AppCompatActivity {
     TextView mBeername;
 
 
+    //Barcode mbeerName = getIntent().getParcelableExtra("Name");
+    //Bundle extras = getIntent().getExtras();
+    //String data = extras.getString("Name");
+    //
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = this.getIntent();
+        //String data = getIntent().getStringExtra("Name");
+        String data = intent.getStringExtra("Name"); // Working 
+
+
+
+
         setContentView(R.layout.activity_beer_information);
 
         mBeername = (TextView)findViewById(R.id.BeerNameText);
