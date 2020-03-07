@@ -24,31 +24,28 @@ public class beerInformation extends AppCompatActivity {
     //DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers")
     //Textviews
 
+     // Working
 
 
 
-    DatabaseReference zonesRef = FirebaseDatabase.getInstance().getReference("Beers");
-    DatabaseReference zone1Ref = zonesRef.child("5010038460160");
-    DatabaseReference zone1NameRef = zone1Ref.child("mName");
-    DatabaseReference zone2 =  zone1Ref.child("mBrewery");
     TextView mBeername;
 
 
-    //Barcode mbeerName = getIntent().getParcelableExtra("Name");
-    //Bundle extras = getIntent().getExtras();
-    //String data = extras.getString("Name");
-    //
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         Intent intent = this.getIntent();
-        //String data = getIntent().getStringExtra("Name");
-        String data = intent.getStringExtra("Name"); // Working 
 
+        String data = intent.getStringExtra("Name");
+
+        DatabaseReference zonesRef = FirebaseDatabase.getInstance().getReference("Beers");
+        DatabaseReference zone1Ref = zonesRef.child(data);
+        DatabaseReference zone1NameRef = zone1Ref.child("mName");
+        DatabaseReference zone2 =  zone1Ref.child("mBrewery");
 
 
 
@@ -62,7 +59,7 @@ public class beerInformation extends AppCompatActivity {
                 String beerName = dataSnapshot.getValue(String.class);
                 //String b = dataSnapshot.child("5010038460160").getValue().toString();
                 mBeername.setText(beerName);
-                Toast.makeText(beerInformation.this,beerName ,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(beerInformation.this,beerName ,Toast.LENGTH_SHORT).show();
             }
 
             @Override

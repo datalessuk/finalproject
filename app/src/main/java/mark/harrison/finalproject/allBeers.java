@@ -70,7 +70,7 @@ public class allBeers extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
-                    String beerClass = beers.getmBrewery() + "  " + beers.getmName();
+                    String beerClass = beers.getmName();
 
                     arrayAdapter.add(beerClass);
 

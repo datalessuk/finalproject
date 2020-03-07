@@ -75,7 +75,7 @@ public class createBeer extends AppCompatActivity {
 
 
 
-
+    //dataSnapshot.hasChild(mBarcode)
 
 
 
@@ -97,7 +97,7 @@ public class createBeer extends AppCompatActivity {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(mBarcode)){
+                        if(dataSnapshot.hasChild(mBeername)){
                             //beerBarcodeInput.setText("Sorry we have that beer on record already");
                             Toast.makeText(createBeer.this,"Sorry we have that beer on record",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(createBeer.this, homeScreen.class);
@@ -112,7 +112,7 @@ public class createBeer extends AppCompatActivity {
 
 
                             Toast.makeText(createBeer.this,"Beer has been created thank you",Toast.LENGTH_SHORT).show();
-                            myRef.child(mBarcode).setValue(beers);
+                            myRef.child(mBeername).setValue(beers);
                             Intent intent = new Intent(createBeer.this, homeScreen.class);
                             view.getContext().startActivity(intent);
                         }
