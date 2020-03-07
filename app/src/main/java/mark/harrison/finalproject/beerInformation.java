@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 public class beerInformation extends AppCompatActivity {
 
     //Database Reference
@@ -29,7 +31,7 @@ public class beerInformation extends AppCompatActivity {
 
 
     TextView mBeername;
-
+    TextView mBeerBrewery;
 
 
 
@@ -52,6 +54,7 @@ public class beerInformation extends AppCompatActivity {
         setContentView(R.layout.activity_beer_information);
 
         mBeername = (TextView)findViewById(R.id.BeerNameText);
+        mBeerBrewery = (TextView) findViewById(R.id.BreweryText);
         zone1NameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -59,6 +62,7 @@ public class beerInformation extends AppCompatActivity {
                 String beerName = dataSnapshot.getValue(String.class);
                 //String b = dataSnapshot.child("5010038460160").getValue().toString();
                 mBeername.setText(beerName);
+
                 //Toast.makeText(beerInformation.this,beerName ,Toast.LENGTH_SHORT).show();
             }
 
@@ -71,6 +75,7 @@ public class beerInformation extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String beerBrewery = dataSnapshot.getValue(String.class);
+                mBeerBrewery.setText(beerBrewery);
                 Toast.makeText(beerInformation.this,beerBrewery,Toast.LENGTH_SHORT).show();
             }
 
