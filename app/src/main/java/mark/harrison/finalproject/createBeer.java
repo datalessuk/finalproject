@@ -37,7 +37,7 @@ public class createBeer extends AppCompatActivity {
     String mFlavours ="";
     String mReview="";
     String mPercentage;
-    String mRating;
+    String mRating ="";
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Beers");// For the main beer class

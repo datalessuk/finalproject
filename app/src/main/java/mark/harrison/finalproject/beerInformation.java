@@ -39,7 +39,7 @@ public class beerInformation extends AppCompatActivity {
     TextView mBeername;
     TextView mBeerBrewery;
     TextView mBeerPercentage;
-
+    TextView mBeerFlavours;
 
 
 
@@ -65,6 +65,7 @@ public class beerInformation extends AppCompatActivity {
         mBeername = (TextView)findViewById(R.id.beerNameText);
         mBeerBrewery = (TextView) findViewById(R.id.beerBreweryText);
         mBeerPercentage = (TextView)findViewById(R.id.beerPercentageText);
+        mBeerFlavours = (TextView)findViewById(R.id.beerFlavoursText);
 
         zone1Ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,10 +78,12 @@ public class beerInformation extends AppCompatActivity {
                     String beerclass = beers.getmName();
                     String brewery = beers.getmBrewery();
                     String percentage = beers.getmPercentage();
+                    String flavours =beers.getmFlavours();
 
                     mBeername.setText("Beer: "+beerclass);
                     mBeerBrewery.setText("Brewery: " +brewery);
                     mBeerPercentage.setText("Percentage " +percentage+"%");
+                    mBeerFlavours.setText("Beer Flavours: "+flavours);
                     //my.add(beers);
                     //String beername = ds.child("mBarcode").getValue(String.class);
                     ////mBeername.setText(beername);

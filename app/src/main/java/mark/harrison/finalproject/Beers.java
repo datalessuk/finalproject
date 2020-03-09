@@ -36,7 +36,13 @@ public class Beers {
         this.mBarcode = mBarcode;
     }
 
+    public String getmRating() {
+        return mRating;
+    }
 
+    public void setmRating(String mRating) {
+        this.mRating = mRating;
+    }
 
     public String getmFlavours() {
         return mFlavours;
@@ -62,6 +68,11 @@ public class Beers {
     private String mReview;
     private String mFlavours;
 
+
+
+    private String mRating;
+    private String mPercentage;
+
     public String getmReview() {
         return mReview;
     }
@@ -70,10 +81,7 @@ public class Beers {
         this.mReview = mReview;
     }
 
-    private String mRating;
 
-
-    private String mPercentage;
 
     public Beers(){
 
