@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +38,7 @@ public class beerInformation extends AppCompatActivity {
 
     TextView mBeername;
     TextView mBeerBrewery;
-
+    TextView mBeerPercentage;
 
 
 
@@ -61,8 +62,9 @@ public class beerInformation extends AppCompatActivity {
 
         setContentView(R.layout.activity_beer_information);
 
-        mBeername = (TextView)findViewById(R.id.BeerNameText);
-        mBeerBrewery = (TextView) findViewById(R.id.BreweryText);
+        mBeername = (TextView)findViewById(R.id.beerNameText);
+        mBeerBrewery = (TextView) findViewById(R.id.beerBreweryText);
+        mBeerPercentage = (TextView)findViewById(R.id.beerPercentageText);
 
         zone1Ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -73,9 +75,12 @@ public class beerInformation extends AppCompatActivity {
                    //String name = ds.child("mName").getValue(String.class);
                     Beers beers = dataSnapshot.getValue(Beers.class);
                     String beerclass = beers.getmName();
-                    String b = beers.getmBrewery();
-                    mBeername.setText(beerclass);
-                    mBeerBrewery.setText(b);
+                    String brewery = beers.getmBrewery();
+                    String percentage = beers.getmPercentage();
+
+                    mBeername.setText("Beer: "+beerclass);
+                    mBeerBrewery.setText("Brewery: " +brewery);
+                    mBeerPercentage.setText("Percentage " +percentage+"%");
                     //my.add(beers);
                     //String beername = ds.child("mBarcode").getValue(String.class);
                     ////mBeername.setText(beername);

@@ -33,10 +33,11 @@ public class createBeer extends AppCompatActivity {
     String mBrewery;
     String mBarcode;
     //None user inputed yet ?
-    int mStock;
+    boolean mStock;
     String mFlavours ="";
     String mReview="";
     String mPercentage;
+    String mRating;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Beers");// For the main beer class
@@ -106,7 +107,7 @@ public class createBeer extends AppCompatActivity {
                         else {
                                 //
 
-                            Beers beers = new Beers(mBeername,mBrewery,mBarcode,mStock,mFlavours,mPercentage);
+                            Beers beers = new Beers(mBeername,mBrewery,mBarcode,mStock,mFlavours,mPercentage,mRating);
 
                             //myRef2.setValue(beers);
 
@@ -130,7 +131,7 @@ public class createBeer extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         beerReviews beerReviews = new beerReviews(mReview);
-                        myRefRewview.child(mBarcode).setValue(beerReviews);
+                        myRefRewview.child(mBeername).setValue(beerReviews);
                     }
 
                     @Override

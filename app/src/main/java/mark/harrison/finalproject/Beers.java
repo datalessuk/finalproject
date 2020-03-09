@@ -20,11 +20,11 @@ public class Beers {
         this.mBrewery = mBrewery;
     }
 
-    public int getmStock() {
+    public boolean getmStock() {
         return mStock;
     }
 
-    public void setmStock(int mStock) {
+    public void setmStock(boolean mStock) {
         this.mStock = mStock;
     }
 
@@ -57,11 +57,20 @@ public class Beers {
 
     private String mName;
     private String mBrewery;
-    private int mStock;
+    private boolean mStock;
     private String mBarcode;
     private String mReview;
     private String mFlavours;
 
+    public String getmReview() {
+        return mReview;
+    }
+
+    public void setmReview(String mReview) {
+        this.mReview = mReview;
+    }
+
+    private String mRating;
 
 
     private String mPercentage;
@@ -79,13 +88,14 @@ public class Beers {
     }
 
 
-    public Beers(String pName,String pBrewery,String pBarcode,int pStock,String pFlavours,String pPercentage){
+    public Beers(String pName,String pBrewery,String pBarcode,boolean pStock,String pFlavours,String pPercentage,String pRating){
         this.mName = pName;
         this.mBrewery = pBrewery;
         this.mBarcode = pBarcode;
         this.mStock = pStock;
         this.mFlavours = pFlavours;
         this.mPercentage = pPercentage;
+        this.mRating = pRating;
     }
 
 
