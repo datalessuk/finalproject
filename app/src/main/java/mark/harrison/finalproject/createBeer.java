@@ -127,7 +127,7 @@ public class createBeer extends AppCompatActivity {
 
                     }
                 });
-                myRefRewview.addListenerForSingleValueEvent(new ValueEventListener() {
+                /*myRefRewview.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         beerReviews beerReviews = new beerReviews(mReview);
@@ -138,7 +138,7 @@ public class createBeer extends AppCompatActivity {
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
 
             }
 

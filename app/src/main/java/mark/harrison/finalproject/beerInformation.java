@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,21 +44,25 @@ public class beerInformation extends AppCompatActivity {
     TextView mBeerPercentage;
     TextView mBeerFlavours;
 
+    Button mReviewButton;
+    TextView mBeerReviewsTextview;
 
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = this.getIntent();
 
-        String data = intent.getStringExtra("Name");
-
+        final String data = intent.getStringExtra("Name");
+        //For the Beers
         DatabaseReference zonesRef = FirebaseDatabase.getInstance().getReference("Beers");
         DatabaseReference zone1Ref = zonesRef.child(data);
-        DatabaseReference zone1NameRef = zone1Ref.child("mName");
-        DatabaseReference zone2 =  zone1Ref.child("mBrewery");
 
-        //final ArrayList my = new ArrayList();
+        //For the reviews
+        DatabaseReference beerReviewsRef = FirebaseDatabase.getInstance().getReference("Reviews");
+        DatabaseReference selectedReviewRef = beerReviewsRef.child(data);
+        //final DatabaseReference childofreview = selectedReviewRef.getRoot();
 
 
 
@@ -66,6 +73,13 @@ public class beerInformation extends AppCompatActivity {
         mBeerBrewery = (TextView) findViewById(R.id.beerBreweryText);
         mBeerPercentage = (TextView)findViewById(R.id.beerPercentageText);
         mBeerFlavours = (TextView)findViewById(R.id.beerFlavoursText);
+        mListView = (ListView) findViewById(R.id.beerReviewsList);
+        ArrayList<String> mAllReviews = new ArrayList<>();
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mAllReviews);
+        mListView.setAdapter(arrayAdapter);
+        arrayAdapter.clear();
+
 
         zone1Ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,9 +98,7 @@ public class beerInformation extends AppCompatActivity {
                     mBeerBrewery.setText("Brewery: " +brewery);
                     mBeerPercentage.setText("Percentage " +percentage+"%");
                     mBeerFlavours.setText("Beer Flavours: "+flavours);
-                    //my.add(beers);
-                    //String beername = ds.child("mBarcode").getValue(String.class);
-                    ////mBeername.setText(beername);
+
 
 
             }
@@ -97,42 +109,29 @@ public class beerInformation extends AppCompatActivity {
             }
         });
 
-        //zone1Ref.addChildEventListener(new ChildEventListener() {
-         /*   @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Beers beers = dataSnapshot.getValue(Beers.class);
-                mBeername.setText(beers.getmName().toString());
-            }
-
+        mReviewButton = (Button)findViewById(R.id.addReviewButton);
+        mReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void onClick(View view) {
+                Intent reviewIntent = new Intent(beerInformation.this, ReviewActivity.class);
+                reviewIntent.putExtra("beerName", data);
+                startActivity(reviewIntent);
 
             }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-        /* zone1NameRef.addValueEventListener(new ValueEventListener() {
+        });
+        selectedReviewRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //String beerName = dataSnapshot.child("5010038460160").getValue().toString();
-                String beerName = dataSnapshot.getValue(String.class);
-                //String b = dataSnapshot.child("5010038460160").getValue().toString();
-                mBeername.setText(beerName);
+                arrayAdapter.clear();// This clears the list when you go back after adding a review
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    //arrayAdapter.add(snapshot.getValue().toString());
+                    beerReviews mBeerReviews =snapshot.getValue(beerReviews.class);
+                    String mBeers = mBeerReviews.getmReviews();
+                    arrayAdapter.add(mBeers);
 
-                //Toast.makeText(beerInformation.this,beerName ,Toast.LENGTH_SHORT).show();
+
+                }
+                arrayAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -140,19 +139,9 @@ public class beerInformation extends AppCompatActivity {
 
             }
         });
-        zone2.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String beerBrewery = dataSnapshot.getValue(String.class);
-                mBeerBrewery.setText(beerBrewery);
-                Toast.makeText(beerInformation.this,beerBrewery,Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });*/
+
 
 
 
