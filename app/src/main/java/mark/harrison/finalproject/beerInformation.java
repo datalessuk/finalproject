@@ -51,8 +51,8 @@ public class beerInformation extends AppCompatActivity {
     RatingBar mRatingBar;
 
     private ListView mListView;
-    private int mRatingCount;
-    private float mRatingTotal;
+    int mRatingCount;
+    float mRatingTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +74,8 @@ public class beerInformation extends AppCompatActivity {
         final DatabaseReference beerFinalRating = beerRating.child(data);
 
 
+
+
         setContentView(R.layout.activity_beer_information);
 
         mBeername = (TextView)findViewById(R.id.beerNameText);
@@ -81,7 +83,7 @@ public class beerInformation extends AppCompatActivity {
         mBeerPercentage = (TextView)findViewById(R.id.beerPercentageText);
         mBeerFlavours = (TextView)findViewById(R.id.beerFlavoursText);
         mListView = (ListView) findViewById(R.id.beerReviewsList);
-        mRatingBar = (RatingBar)findViewById(R.id.beerRatingBar);
+        mRatingBar = (RatingBar)findViewById(R.id.finalRatingBar);
         ArrayList<String> mAllReviews = new ArrayList<>();
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mAllReviews);
@@ -147,7 +149,7 @@ public class beerInformation extends AppCompatActivity {
 
             }
         });
-        beerFinalRating.addValueEventListener(new ValueEventListener() {
+        /*beerFinalRating.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -164,17 +166,23 @@ public class beerInformation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
         beerFinalRating.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    mRatingCount = (int) dataSnapshot.getChildrenCount();
+                    //Toast.makeText(beerInformation.this,"total is: "+ mRatingCount,Toast.LENGTH_SHORT).show();
+
                     Map<String,Object>  map = (Map<String, Object>) ds.getValue();
                     Object value = map.get("mBeerRatings");
                     float pValue = Float.parseFloat(String.valueOf(value));
                     mRatingTotal += pValue;
-                    Toast.makeText(beerInformation.this,"The Total is: "+ mRatingTotal,Toast.LENGTH_LONG).show();
+                    float finalrating= GetBeerRating(mRatingCount,mRatingTotal);
+                    mRatingBar.setRating(finalrating);
+                    Toast.makeText(beerInformation.this,"The total is : " + finalrating,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(beerInformation.this,"The Total is: "+ mRatingTotal,Toast.LENGTH_LONG).show();
                 }
             }
 

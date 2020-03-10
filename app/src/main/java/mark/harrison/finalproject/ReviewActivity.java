@@ -58,7 +58,7 @@ public class ReviewActivity extends AppCompatActivity {
         mRewviewButton = (Button)findViewById(R.id.addReviewButton);
         mReviewText = (TextView)findViewById(R.id.beerReviewText);
 
-        mRatingButton = (Button)findViewById(R.id.ratingButton);
+
         mRatingBar = (RatingBar)findViewById(R.id.beerRatingBar);
 
         zone1Ref.addValueEventListener(new ValueEventListener() {
@@ -103,6 +103,11 @@ public class ReviewActivity extends AppCompatActivity {
                         beerReviews reviews = new beerReviews(reviewText);
                         zone1Ref.child(String.valueOf(reviewID+1)).setValue(reviews);
 
+                        float vRating = mRatingBar.getRating();
+
+                        beersRatings beersRatings = new beersRatings(vRating);
+                        Ratingref1.child(String.valueOf(reviewCounter+1)).setValue(beersRatings);
+
                     }
 
                     @Override
@@ -110,10 +115,12 @@ public class ReviewActivity extends AppCompatActivity {
 
                     }
                 });
+                Intent intent = new Intent(ReviewActivity.this, allBeers.class);
+                view.getContext().startActivity(intent);
             }
         });
 
-        mRatingButton.setOnClickListener(new View.OnClickListener() {
+        /*mRatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Ratingref1.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -132,7 +139,7 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
             /*mRatingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
