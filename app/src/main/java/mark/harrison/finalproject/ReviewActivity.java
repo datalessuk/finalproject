@@ -33,7 +33,7 @@ public class ReviewActivity extends AppCompatActivity {
     String reviewText;
     long reviewID = 0;
 
-    long reviewScore =0;
+    long reviewCounter =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +45,14 @@ public class ReviewActivity extends AppCompatActivity {
        final DatabaseReference zone1Ref = zonesRef.child(data);
 
         //For the rating
-        DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
-        final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
+        //DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
+        //final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
 
-        final Map<String, Object> updates = new HashMap<String,Object>();
+        //final Map<String, Object> updates = new HashMap<String,Object>();
+
+        //Next Go at the rating
+        final DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("Ratings");
+        final DatabaseReference Ratingref1 = ratingRef.child(data);
 
 
         mRewviewButton = (Button)findViewById(R.id.addReviewButton);
@@ -72,11 +76,11 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-        beerratingRef1.addValueEventListener(new ValueEventListener() {
+        Ratingref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-                    reviewScore = (dataSnapshot.getChildrenCount());
+                    reviewCounter = (dataSnapshot.getChildrenCount());
                 }
             }
 
@@ -109,22 +113,45 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
+        mRatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Ratingref1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        float vRating = mRatingBar.getRating();
 
-            mRatingButton.setOnClickListener(new View.OnClickListener() {
+
+                        beersRatings beersRatings = new beersRatings(vRating);
+                        Ratingref1.child(String.valueOf(reviewCounter+1)).setValue(beersRatings);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+            /*mRatingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     beerratingRef1.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             HashMap<String, Object> result = new HashMap<>();
-                            float rating = mRatingBar.getRating();
-                            String mRating = String.valueOf(rating);
+                            //int mf =(int)reviewCounter;
+
+
+                            //float rating = mRatingBar.getRating();
+                            //String mRating = String.valueOf(rating);
                             //String rating = "6";
-                            result.put("mRating",mRating);
+                            //result.put("mRating",mRating);
                            // Beers beers = new Beers(rating);
                             //beers.setmRating(rating);
                             //beerratingRef1.setValue(beers);
-                            beerratingRef1.updateChildren(result);
+                            //beerratingRef1.updateChildren(result);
 
 
                         }
@@ -135,7 +162,7 @@ public class ReviewActivity extends AppCompatActivity {
                         }
                     });
                 }
-            });
+            });*/
 
 
 

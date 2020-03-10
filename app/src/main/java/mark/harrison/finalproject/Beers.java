@@ -69,6 +69,15 @@ public class Beers {
     private String mRating;
     private String mPercentage;
 
+    public int getmRatingCounter() {
+        return mRatingCounter;
+    }
+
+    public void setmRatingCounter(int mRatingCounter) {
+        this.mRatingCounter = mRatingCounter;
+    }
+
+    private int mRatingCounter;
 
 
 
@@ -93,6 +102,7 @@ public class Beers {
         this.mFlavours = pFlavours;
         this.mPercentage = pPercentage;
         this.mRating = pRating;
+
     }
 
 
