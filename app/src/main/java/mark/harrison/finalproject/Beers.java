@@ -107,7 +107,9 @@ public class Beers {
     }
 
 
-
+    public Beers(String pRaing){
+        this.mRating = pRaing;
+    }
 
 
 

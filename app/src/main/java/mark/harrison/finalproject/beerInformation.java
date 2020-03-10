@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class beerInformation extends AppCompatActivity {
 
     Button mReviewButton;
     TextView mBeerReviewsTextview;
+    RatingBar mRatingBar;
 
     private ListView mListView;
 
@@ -74,6 +76,7 @@ public class beerInformation extends AppCompatActivity {
         mBeerPercentage = (TextView)findViewById(R.id.beerPercentageText);
         mBeerFlavours = (TextView)findViewById(R.id.beerFlavoursText);
         mListView = (ListView) findViewById(R.id.beerReviewsList);
+        mRatingBar = (RatingBar)findViewById(R.id.beerRatingBar);
         ArrayList<String> mAllReviews = new ArrayList<>();
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,mAllReviews);
