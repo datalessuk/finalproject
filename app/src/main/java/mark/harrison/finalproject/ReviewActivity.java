@@ -17,6 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ReviewActivity extends AppCompatActivity {
 
 
@@ -30,7 +33,7 @@ public class ReviewActivity extends AppCompatActivity {
     String reviewText;
     long reviewID = 0;
 
-    long reviewScore;
+    long reviewScore =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,10 @@ public class ReviewActivity extends AppCompatActivity {
        final DatabaseReference zone1Ref = zonesRef.child(data);
 
         //For the rating
-        final DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
-        final DatabaseReference beerratingRef1 = beerRatingRef.child(data).child("mRating");
+        DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
+        final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
+
+        final Map<String, Object> updates = new HashMap<String,Object>();
 
 
         mRewviewButton = (Button)findViewById(R.id.addReviewButton);
@@ -59,6 +64,20 @@ public class ReviewActivity extends AppCompatActivity {
                     reviewID =(dataSnapshot.getChildrenCount());
                 }
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        beerratingRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    reviewScore = (dataSnapshot.getChildrenCount());
+                }
             }
 
             @Override
@@ -90,28 +109,24 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-        /*m##RatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                beerratingRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
             mRatingButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     beerratingRef1.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            
+                            HashMap<String, Object> result = new HashMap<>();
+                            float rating = mRatingBar.getRating();
+                            String mRating = String.valueOf(rating);
+                            //String rating = "6";
+                            result.put("mRating",mRating);
+                           // Beers beers = new Beers(rating);
+                            //beers.setmRating(rating);
+                            //beerratingRef1.setValue(beers);
+                            beerratingRef1.updateChildren(result);
+
+
                         }
 
                         @Override
