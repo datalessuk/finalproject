@@ -25,6 +25,7 @@ public class ReviewActivity extends AppCompatActivity {
 
     private TextView mReviewText;
     private Button mRewviewButton;
+    private TextView mFlavoursText;
 
     //Test
     private Button mRatingButton;
@@ -45,8 +46,8 @@ public class ReviewActivity extends AppCompatActivity {
        final DatabaseReference zone1Ref = zonesRef.child(data);
 
         //For the rating
-        //DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
-        //final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
+        DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
+        final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
 
         //final Map<String, Object> updates = new HashMap<String,Object>();
 
@@ -57,7 +58,7 @@ public class ReviewActivity extends AppCompatActivity {
 
         mRewviewButton = (Button)findViewById(R.id.addReviewButton);
         mReviewText = (TextView)findViewById(R.id.beerReviewText);
-
+        mFlavoursText= (TextView)findViewById(R.id.flavoursText);
 
         mRatingBar = (RatingBar)findViewById(R.id.beerRatingBar);
 
@@ -108,6 +109,8 @@ public class ReviewActivity extends AppCompatActivity {
                         beersRatings beersRatings = new beersRatings(vRating);
                         Ratingref1.child(String.valueOf(reviewCounter+1)).setValue(beersRatings);
 
+
+
                     }
 
                     @Override
@@ -115,6 +118,24 @@ public class ReviewActivity extends AppCompatActivity {
 
                     }
                 });
+                beerratingRef1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        HashMap<String, Object> result = new HashMap<>();
+                        String flavours = mFlavoursText.getText().toString();
+                        result.put("mFlavours",flavours);
+                        //Beers beers = new Beers(flavours);
+                        beerratingRef1.updateChildren(result);
+                        //result.put("mRating",mRating);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
                 Intent intent = new Intent(ReviewActivity.this, allBeers.class);
                 view.getContext().startActivity(intent);
             }
