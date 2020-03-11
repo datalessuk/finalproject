@@ -168,7 +168,7 @@ public class beerInformation extends AppCompatActivity {
             }
         });*/
 
-        beerFinalRating.addValueEventListener(new ValueEventListener() {
+       /* beerFinalRating.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
@@ -190,7 +190,7 @@ public class beerInformation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
 
 
 

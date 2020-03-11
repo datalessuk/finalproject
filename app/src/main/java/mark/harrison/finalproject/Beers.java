@@ -36,11 +36,11 @@ public class Beers {
         this.mBarcode = mBarcode;
     }
 
-    public String getmRating() {
+    public float getmRating() {
         return mRating;
     }
 
-    public void setmRating(String mRating) {
+    public void setmRating(float mRating) {
         this.mRating = mRating;
     }
 
@@ -66,7 +66,7 @@ public class Beers {
     private boolean mStock;
     private String mBarcode;
     private String mFlavours;
-    private String mRating;
+    private float mRating;
     private String mPercentage;
 
     public int getmRatingCounter() {
@@ -94,7 +94,7 @@ public class Beers {
     }
 
 
-    public Beers(String pName,String pBrewery,String pBarcode,boolean pStock,String pFlavours,String pPercentage,String pRating){
+    public Beers(String pName,String pBrewery,String pBarcode,boolean pStock,String pFlavours,String pPercentage,float pRating){
         this.mName = pName;
         this.mBrewery = pBrewery;
         this.mBarcode = pBarcode;
@@ -114,5 +114,7 @@ public class Beers {
         this.mFlavours = pFlavours;
     }
 
-
+    public Beers(float pRating){
+        this.mRating =pRating;
+    }
 }
