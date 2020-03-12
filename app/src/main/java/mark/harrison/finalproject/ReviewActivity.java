@@ -137,8 +137,6 @@ public class ReviewActivity extends AppCompatActivity {
                         beersRatings beersRatings = new beersRatings(vRating);
                         Ratingref1.child(String.valueOf(reviewCounter+1)).setValue(beersRatings);
 
-
-
                     }
 
                     @Override
@@ -147,25 +145,8 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 });
 
+                //#################### RATING SYSTEM ############################//
 
-
-
-
-
-
-
-
-
-
-
-                Intent intent = new Intent(ReviewActivity.this, allBeers.class);
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        mReviewButtonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 beerratingRef1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -208,18 +189,11 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 });
 
-                beerFinalRating.addValueEventListener(new ValueEventListener() {
+
+                Ratingref1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        float sum =0;
-                        for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Map<String,Object>  map = (Map<String, Object>) ds.getValue();
-                            Object value = map.get("mBeerRatings");
-                            float pValue = Float.parseFloat(String.valueOf(value));
-                            sum +=pValue;
-                            Toast.makeText(ReviewActivity.this,"Total is: " +sum,Toast.LENGTH_SHORT).show();
-
-                        }
+                        mRatingCount = (int)dataSnapshot.getChildrenCount();
 
                     }
 
@@ -229,23 +203,20 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 });
 
+
                 /*beerFinalRating.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        float sum =0;
                         for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                            mRatingCount = (int) dataSnapshot.getChildrenCount();
-                            //Toast.makeText(ReviewActivity.this,"total is: "+ mRatingCount,Toast.LENGTH_SHORT).show();
-
-                            Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                            Map<String,Object>  map = (Map<String, Object>) ds.getValue();
                             Object value = map.get("mBeerRatings");
                             float pValue = Float.parseFloat(String.valueOf(value));
-                            Toast.makeText(ReviewActivity.this,"Total is: " +pValue,Toast.LENGTH_SHORT).show();
-                            //total += pValue;
-                            //Toast.makeText(ReviewActivity.this,"is "+total,Toast.LENGTH_SHORT).show();
+                            sum +=pValue;
+                            mRatingTotal = GetBeerRating(sum,mRatingCount);
+                            Toast.makeText(ReviewActivity.this,"Total is: " +sum + " the : " + mRatingCount+ " The average is : "+ mRatingTotal,Toast.LENGTH_LONG).show();
 
-                            //mRatingBar.setRating(finalrating);
-                            //finalrating = GetBeerRating(mRatingCount, mCurrentRating);
-                            finalrating = GetBeerRating(mRatingCount,total);
+
                         }
 
                     }
@@ -256,13 +227,13 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 });*/
 
-                beerratingRef1.addValueEventListener(new ValueEventListener() {
+                /*beerratingRef1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         HashMap<String, Object> result = new HashMap<>();
                         //String flavours = mFlavoursText.getText().toString();
                         //result.put("mFlavours",flavours);
-                        result.put("mRating",finalrating);
+                        result.put("mRating",mRatingTotal);
                         //Beers beers = new Beers(flavours);
                         beerratingRef1.updateChildren(result);
                         //result.put("mRating",mRating);
@@ -273,8 +244,37 @@ public class ReviewActivity extends AppCompatActivity {
 
                     }
                 });
-
+*/
                 reviewText = mReviewText.getText().toString();
+
+
+
+
+
+
+
+
+
+
+                Intent intent = new Intent(ReviewActivity.this, allBeers.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+
+        mReviewButtonTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -344,7 +344,7 @@ public class ReviewActivity extends AppCompatActivity {
 
 
     }
-    public float GetBeerRating(int pCountTotal,float pRatingTotal ){
+    public float GetBeerRating(float pRatingTotal,int pCountTotal ){
         float mRating = pRatingTotal/ pCountTotal;
         return  mRating;
 

@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +74,11 @@ public class beerInformation extends AppCompatActivity {
         DatabaseReference beerRating = FirebaseDatabase.getInstance().getReference("Ratings");
         final DatabaseReference beerFinalRating = beerRating.child(data);
 
+        DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
+        final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
 
+        final DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("Ratings");
+        final DatabaseReference Ratingref1 = ratingRef.child(data);
 
 
         setContentView(R.layout.activity_beer_information);
@@ -103,13 +108,13 @@ public class beerInformation extends AppCompatActivity {
                     String brewery = beers.getmBrewery();
                     String percentage = beers.getmPercentage();
                     String flavours =beers.getmFlavours();
+                    float setRating = beers.getmRating();
 
                     mBeername.setText("Beer: "+beerclass);
                     mBeerBrewery.setText("Brewery: " +brewery);
                     mBeerPercentage.setText("Percentage " +percentage+"%");
                     mBeerFlavours.setText("Beer Flavours: "+flavours);
-
-
+                    mRatingBar.setRating(setRating);
 
             }
 
@@ -149,16 +154,10 @@ public class beerInformation extends AppCompatActivity {
 
             }
         });
-        /*beerFinalRating.addValueEventListener(new ValueEventListener() {
+        Ratingref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    mRatingCount = (int) dataSnapshot.getChildrenCount();
-                    //Toast.makeText(beerInformation.this,"total is: "+ mRatingCount,Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    //Toast.makeText(beerInformation.this,"Sorry",Toast.LENGTH_SHORT).show();
-                }
+                mRatingCount = (int)dataSnapshot.getChildrenCount();
 
             }
 
@@ -166,39 +165,61 @@ public class beerInformation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
-       /* beerFinalRating.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    mRatingCount = (int) dataSnapshot.getChildrenCount();
-                    //Toast.makeText(beerInformation.this,"total is: "+ mRatingCount,Toast.LENGTH_SHORT).show();
 
-                    Map<String,Object>  map = (Map<String, Object>) ds.getValue();
-                    Object value = map.get("mBeerRatings");
-                    float pValue = Float.parseFloat(String.valueOf(value));
-                    mRatingTotal += pValue;
-                    float finalrating= GetBeerRating(mRatingCount,mRatingTotal);
-                    mRatingBar.setRating(finalrating);
-                    Toast.makeText(beerInformation.this,"The total is : " + finalrating,Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(beerInformation.this,"The Total is: "+ mRatingTotal,Toast.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });*/
+        beerFinalRating.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        float sum =0;
+                        for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                            Map<String,Object>  map = (Map<String, Object>) ds.getValue();
+                            Object value = map.get("mBeerRatings");
+                            float pValue = Float.parseFloat(String.valueOf(value));
+                            sum +=pValue;
+                            mRatingTotal = GetBeerRating(sum,mRatingCount);
+                            Toast.makeText(beerInformation.this,"Total is: " +sum + " the : " + mRatingCount+ " The average is : "+ mRatingTotal,Toast.LENGTH_LONG).show();
+
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                beerratingRef1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        HashMap<String, Object> result = new HashMap<>();
+                        //String flavours = mFlavoursText.getText().toString();
+                        //result.put("mFlavours",flavours);
+                        result.put("mRating",mRatingTotal);
+                        //Beers beers = new Beers(flavours);
+                        beerratingRef1.updateChildren(result);
+                        //result.put("mRating",mRating);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
 
 
     }
-    public float GetBeerRating(int pCountTotal,float pRatingTotal ){
-        float mRating = pRatingTotal / pCountTotal;
+    public float GetBeerRating(float pRatingTotal,int pCountTotal ){
+        float mRating = pRatingTotal/ pCountTotal;
         return  mRating;
 
     }
+
+
 
 }
