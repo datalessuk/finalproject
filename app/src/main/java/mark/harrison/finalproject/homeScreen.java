@@ -6,13 +6,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class homeScreen extends AppCompatActivity {
+    private FirebaseAuth mAuth;
 
     Button mBeerButton;
     Button mBeerButtonTwo;
     Button mBeerButtonThree;
     Button mBeerButtonFour;
+    Button mSignOutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +58,23 @@ public class homeScreen extends AppCompatActivity {
             view.getContext().startActivity(intent);
         }
     });
+    mSignOutButton = (Button)findViewById(R.id.signOutbutton);
+    mSignOutButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+                mAuth.getInstance().signOut();
+                Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                view.getContext().startActivity(intent);
+
+            }
+
+
+
+
+    });
     }
+
 
 
 
