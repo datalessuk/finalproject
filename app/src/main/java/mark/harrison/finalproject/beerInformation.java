@@ -68,7 +68,7 @@ public class beerInformation extends AppCompatActivity {
         //For the reviews
         DatabaseReference beerReviewsRef = FirebaseDatabase.getInstance().getReference("Reviews");
         DatabaseReference selectedReviewRef = beerReviewsRef.child(data);
-        //final DatabaseReference childofreview = selectedReviewRef.getRoot();
+
 
         //For the Rating
         DatabaseReference beerRating = FirebaseDatabase.getInstance().getReference("Ratings");

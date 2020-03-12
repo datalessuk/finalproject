@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView mEmail;
     private TextView mPassword;
+    private ProgressBar mProgressBar;
 
     Button mLogInButton;
 
@@ -42,15 +44,21 @@ public class LoginActivity extends AppCompatActivity {
         //Firebase
         mAuth = FirebaseAuth.getInstance();
 
-
+        mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         mEmail = findViewById(R.id.loginEmailInput);
         mPassword =(TextView) findViewById(R.id.passwordInput);
+
+        if(mAuth.getCurrentUser() !=null){
+            startActivity(new Intent(getApplicationContext(),homeScreen.class));
+            finish();
+        }
 
         mLogInButton = (Button)findViewById(R.id.signInButton);
         mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mProgressBar.setVisibility(View.VISIBLE);
 
                 if(!inputValidation.getInstance().whiteSpaceCheck(mEmail.getText().toString())){
                     mEmail.setError("Please enter your Email Address");
@@ -73,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                mProgressBar.setVisibility(View.GONE);
                                 startActivity(new Intent(getApplicationContext(),homeScreen.class));
                             }
                             else {

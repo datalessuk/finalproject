@@ -66,7 +66,7 @@ public class allBeers extends AppCompatActivity {
         Reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //arrayAdapter.clear();
+                arrayAdapter.clear();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
