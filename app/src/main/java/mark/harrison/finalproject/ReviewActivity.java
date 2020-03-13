@@ -27,7 +27,7 @@ public class ReviewActivity extends AppCompatActivity {
     private Button mRewviewButton;
     private TextView mFlavoursText;
 
-    private Button mReviewButtonTest;
+
 
     //Test
     private Button mRatingButton;
@@ -35,21 +35,10 @@ public class ReviewActivity extends AppCompatActivity {
 
     String reviewText;
     long reviewID = 0;
-
     long reviewCounter =0;
-
-
-
-    int mRatingCount;
-    float mRatingTotal;
-
-    //float pValue;
-    float finalrating;
-
-    float anotherRatong;
     float mCurrentRating;
-
     float total;
+
 
 
     @Override
@@ -61,10 +50,10 @@ public class ReviewActivity extends AppCompatActivity {
 
         final String data = intent.getStringExtra("beerName");
         DatabaseReference zonesRef = FirebaseDatabase.getInstance().getReference("Reviews");
-       final DatabaseReference zone1Ref = zonesRef.child(data);
+        final DatabaseReference zone1Ref = zonesRef.child(data);
 
         //For the rating
-        DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
+        final DatabaseReference beerRatingRef = FirebaseDatabase.getInstance().getReference("Beers");
         final DatabaseReference beerratingRef1 = beerRatingRef.child(data);
 
         //final Map<String, Object> updates = new HashMap<String,Object>();
@@ -73,18 +62,16 @@ public class ReviewActivity extends AppCompatActivity {
         final DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("Ratings");
         final DatabaseReference Ratingref1 = ratingRef.child(data);
 
-        //For the final Rating
-        DatabaseReference beerRating = FirebaseDatabase.getInstance().getReference("Ratings");
-        final DatabaseReference beerFinalRating = beerRating.child(data);
+        final DatabaseReference mRef1 = FirebaseDatabase.getInstance().getReference("Beers");
+        final DatabaseReference mFlavoursRef = beerRatingRef.child(data);
+
 
 
         mRewviewButton = (Button)findViewById(R.id.addReviewButton);
         mReviewText = (TextView)findViewById(R.id.beerReviewText);
         mFlavoursText= (TextView)findViewById(R.id.flavoursText);
-
         mRatingBar = (RatingBar)findViewById(R.id.beerRatingBar);
 
-        mReviewButtonTest = (Button)findViewById(R.id.reviewTestbutton);
 
         zone1Ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,10 +88,6 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
         Ratingref1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -118,7 +101,6 @@ public class ReviewActivity extends AppCompatActivity {
 
             }
         });
-
 
         mRewviewButton.setOnClickListener(new View.OnClickListener() {
 
@@ -189,11 +171,20 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 });
 
-
-                Ratingref1.addValueEventListener(new ValueEventListener() {
+                mFlavoursRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        mRatingCount = (int)dataSnapshot.getChildrenCount();
+                        Beers beers = dataSnapshot.getValue(Beers.class);
+                        String beerflavours = beers.getmFlavours();
+
+                        Map<String, Object> updates = new HashMap<String,Object>();
+                        String flavours = mFlavoursText.getText().toString();
+                        updates.put("mFlavours",beerflavours + flavours + ",");
+
+                        mFlavoursRef.updateChildren(updates);//Void
+                        //mFlavoursRef.updateChildren(updates); //Task
+
+
 
                     }
 
@@ -204,56 +195,8 @@ public class ReviewActivity extends AppCompatActivity {
                 });
 
 
-                /*beerFinalRating.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        float sum =0;
-                        for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Map<String,Object>  map = (Map<String, Object>) ds.getValue();
-                            Object value = map.get("mBeerRatings");
-                            float pValue = Float.parseFloat(String.valueOf(value));
-                            sum +=pValue;
-                            mRatingTotal = GetBeerRating(sum,mRatingCount);
-                            Toast.makeText(ReviewActivity.this,"Total is: " +sum + " the : " + mRatingCount+ " The average is : "+ mRatingTotal,Toast.LENGTH_LONG).show();
 
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
-                /*beerratingRef1.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        HashMap<String, Object> result = new HashMap<>();
-                        //String flavours = mFlavoursText.getText().toString();
-                        //result.put("mFlavours",flavours);
-                        result.put("mRating",mRatingTotal);
-                        //Beers beers = new Beers(flavours);
-                        beerratingRef1.updateChildren(result);
-                        //result.put("mRating",mRating);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-*/
                 reviewText = mReviewText.getText().toString();
-
-
-
-
-
-
-
-
 
 
                 Intent intent = new Intent(ReviewActivity.this, allBeers.class);
@@ -261,94 +204,10 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-        mReviewButtonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-        });
-
-
-
-        //Toast.makeText(ReviewActivity.this, "The total is : " + finalrating, Toast.LENGTH_SHORT).show();
-
-
-
-
-        /*mRatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Ratingref1.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        float vRating = mRatingBar.getRating();
-
-
-                        beersRatings beersRatings = new beersRatings(vRating);
-                        Ratingref1.child(String.valueOf(reviewCounter+1)).setValue(beersRatings);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });*/
-
-            /*mRatingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    beerratingRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            HashMap<String, Object> result = new HashMap<>();
-                            //int mf =(int)reviewCounter;
-
-
-                            //float rating = mRatingBar.getRating();
-                            //String mRating = String.valueOf(rating);
-                            //String rating = "6";
-                            //result.put("mRating",mRating);
-                           // Beers beers = new Beers(rating);
-                            //beers.setmRating(rating);
-                            //beerratingRef1.setValue(beers);
-                            //beerratingRef1.updateChildren(result);
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            });*/
-
-
-
-
-
     }
-    public float GetBeerRating(float pRatingTotal,int pCountTotal ){
-        float mRating = pRatingTotal/ pCountTotal;
-        return  mRating;
 
-    }
+
+
 
 }
 
