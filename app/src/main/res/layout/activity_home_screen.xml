@@ -37,50 +37,26 @@
 
     <Button
         android:id="@+id/cameraButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="78dp"
+        android:layout_height="94dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="166dp"
-        android:layout_marginRight="166dp"
-        android:layout_marginBottom="354dp"
-        android:text="Camera" />
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        android:layout_marginBottom="413dp"
+        android:text="Scan Beer" />
 
     <Button
         android:id="@+id/beerInfoButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="78dp"
+        android:layout_height="94dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="244dp"
-        android:layout_marginRight="244dp"
-        android:layout_marginBottom="528dp"
-        android:text="All Beers" />
-
-    <Button
-        android:id="@+id/createBeerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="89dp"
-        android:layout_marginRight="89dp"
-        android:layout_marginBottom="541dp"
-        android:text="Create" />
-
-    <Button
-        android:id="@+id/allbeers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="274dp"
+        android:layout_marginEnd="274dp"
+        android:layout_marginRight="274dp"
+        android:layout_marginBottom="415dp"
         android:text="All Beers" />
 
     <Button

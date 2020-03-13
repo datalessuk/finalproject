@@ -23,23 +23,8 @@ public class homeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
-        mBeerButton = (Button)findViewById(R.id.beerInfoButton2);
-        mBeerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),allBeers.class);
-                view.getContext().startActivity(intent);
-            }
-        });
 
-        mBeerButtonTwo = (Button)findViewById(R.id.createBeerButton);
-        mBeerButtonTwo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),createBeer.class);
-                view.getContext().startActivity(intent);
-            }
-        });
+
 
         mBeerButtonThree = (Button)findViewById(R.id.cameraButton);
         mBeerButtonThree.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +35,11 @@ public class homeScreen extends AppCompatActivity {
             }
         });
 
-    mBeerButtonFour = (Button)findViewById(R.id.allbeers);
+    mBeerButtonFour = (Button)findViewById(R.id.beerInfoButton2);
     mBeerButtonFour.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(view.getContext(),beerInformation.class);
+            Intent intent = new Intent(view.getContext(),allBeers.class);
             view.getContext().startActivity(intent);
         }
     });

@@ -62,7 +62,7 @@ public class ReviewActivity extends AppCompatActivity {
         final DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("Ratings");
         final DatabaseReference Ratingref1 = ratingRef.child(data);
 
-        final DatabaseReference mRef1 = FirebaseDatabase.getInstance().getReference("Beers");
+
         final DatabaseReference mFlavoursRef = beerRatingRef.child(data);
 
 
@@ -181,10 +181,7 @@ public class ReviewActivity extends AppCompatActivity {
                         String flavours = mFlavoursText.getText().toString();
                         updates.put("mFlavours",beerflavours + flavours + ",");
 
-                        mFlavoursRef.updateChildren(updates);//Void
-                        //mFlavoursRef.updateChildren(updates); //Task
-
-
+                        mFlavoursRef.updateChildren(updates);
 
                     }
 
