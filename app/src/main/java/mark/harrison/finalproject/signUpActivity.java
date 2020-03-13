@@ -189,7 +189,7 @@ public class signUpActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                                             if(!task.isSuccessful()){
-                                                Toast.makeText(signUpActivity.this,"test",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(signUpActivity.this,"Sorry we can't make your account , please try another email ",Toast.LENGTH_SHORT).show();
 
 
                                             }
