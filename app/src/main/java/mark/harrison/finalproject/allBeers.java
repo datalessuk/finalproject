@@ -40,11 +40,7 @@ public class allBeers extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     ArrayList<String> mAllBeers = new ArrayList<>();
-    String beerCode;
 
-    String hello;
-
-    List listA = new ArrayList();
 
 
     @Override
