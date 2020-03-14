@@ -195,8 +195,9 @@ public class signUpActivity extends AppCompatActivity {
                                             }
                                             else {
                                                 User user = new User(mFirstname,mUserName,mEmail);
-
-                                                myRef.child(mUserName).setValue(user);
+                                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                //myRef.child(mUserName).setValue(user);
+                                                myRef.child(uid).setValue(user);
 
 
                                                 //myRef.child(String.valueOf(mMaxId+1)).setValue(user);
@@ -220,15 +221,6 @@ public class signUpActivity extends AppCompatActivity {
                         }
                     });
                 }
-
-
-
-
-
-
-
-
-
             }
 
 

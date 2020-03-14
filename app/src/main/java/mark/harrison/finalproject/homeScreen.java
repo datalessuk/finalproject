@@ -24,6 +24,7 @@ public class homeScreen extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
 
     Button mBeerButton;
@@ -38,7 +39,23 @@ public class homeScreen extends AppCompatActivity {
 
 
         String mUserID = firebaseAuth.getCurrentUser().getUid();
-        DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users");
+
+        ref.child(mUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String mUsername = dataSnapshot.child("mUserName").getValue().toString();
+                //Toast.makeText(homeScreen.this,"User name is "+ mUsername,Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        /*DatabaseReference ref= FirebaseDatabase.getInstance().getReference().child("Users");
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -51,7 +68,7 @@ public class homeScreen extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
         //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //String name = user.getUid();
         //DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child("mUserName");
