@@ -37,7 +37,7 @@ public class homeScreen extends AppCompatActivity {
     private TextView mSearchBar;
     private String mSeachResult;
 
-    Button mBeerButton;
+    Button mLocationButton;
     Button mBeerButtonTwo;
     Button mBeerButtonThree;
     Button mBeerButtonFour;
@@ -64,6 +64,15 @@ public class homeScreen extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        mLocationButton = (Button)findViewById(R.id.locationButton);
+        mLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),locationActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 
