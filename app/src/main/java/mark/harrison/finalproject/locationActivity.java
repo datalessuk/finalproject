@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -52,7 +53,7 @@ public class locationActivity extends AppCompatActivity {
     private TextView mLong;
     private TextView mLatt;
     private static final int MY_PERMISSIONS_REQUEST_FIND_LOCATION =101;
-    private static final int mProximityRadius = 1000;
+    private static final int mProximityRadius = 10000;
 
     private double mLatitude;
     private double mLongitude;
@@ -125,12 +126,12 @@ public class locationActivity extends AppCompatActivity {
 
                         for(int x =0; x <nearByPlaces.size();x++){
 
-                            temp.add( x,nearByPlaces.get(x).getmName()+"\nAddress "+ nearByPlaces.get(x).getmVicinity());
+                            temp.add( x,nearByPlaces.get(x).getmName());
 
                         }
                         myAdapter = new ArrayAdapter(locationActivity.this,android.R.layout.simple_list_item_1,temp);
                         mPlacesList.setAdapter(myAdapter);
-                        
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -142,6 +143,16 @@ public class locationActivity extends AppCompatActivity {
             }
 
         });
+        mPlacesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                int itemPosition   = position;
+                String  itemValue    = (String) mPlacesList.getItemAtPosition(position);
+                Toast.makeText(locationActivity.this,"Clicked"+itemPosition+"Clicked"+ itemValue,Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override
