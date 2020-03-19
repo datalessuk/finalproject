@@ -2,7 +2,7 @@ package mark.harrison.finalproject;
 
 import java.io.Serializable;
 
-public class Place implements Serializable {
+public class Place {
     public String getmId() {
         return mId;
     }
@@ -43,6 +43,11 @@ public class Place implements Serializable {
     public Place(){
 
     }
+    public Place(String pName,String pVicinity){
+        this.mName = pName;
+        this.mVicinity =pVicinity;
+    }
+
     public Place(String pId,String pName,String pReference,String pVicinity){
         this.mId = pId;
         this.mName =pName;
