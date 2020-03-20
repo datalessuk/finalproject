@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -31,6 +32,11 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import org.json.JSONArray;
@@ -53,7 +59,7 @@ public class locationActivity extends AppCompatActivity {
     private TextView mLong;
     private TextView mLatt;
     private static final int MY_PERMISSIONS_REQUEST_FIND_LOCATION =101;
-    private static final int mProximityRadius = 10000;
+    private static final int mProximityRadius = 1000;
 
     private double mLatitude;
     private double mLongitude;
@@ -65,6 +71,12 @@ public class locationActivity extends AppCompatActivity {
     private final String mLocationType= "supermarket";
     private RequestQueue mQueue;
     private Context mApplicationContext;
+    //Shop Database
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Shop");
+
+    //For the shop beerinfo
+
 
 
 
@@ -147,8 +159,31 @@ public class locationActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 int itemPosition   = position;
-                String  itemValue    = (String) mPlacesList.getItemAtPosition(position);
-                Toast.makeText(locationActivity.this,"Clicked"+itemPosition+"Clicked"+ itemValue,Toast.LENGTH_SHORT).show();
+                final String  itemValue    = (String) mPlacesList.getItemAtPosition(position);
+                //Toast.makeText(locationActivity.this,"Clicked"+itemPosition+"Clicked"+ itemValue,Toast.LENGTH_SHORT).show();
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        //Shops shops = new Shops(itemValue);
+                        //myRef.child(itemValue).setValue(shops);
+
+                        //User user = new User(mFirstname,mUserName,mEmail);
+                        //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        //myRef.child(mUserName).setValue(user);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+                Intent intent = new Intent(locationActivity.this, inStockActivity.class);
+                intent.putExtra("Name", itemValue);
+                startActivity(intent);
 
             }
         });
