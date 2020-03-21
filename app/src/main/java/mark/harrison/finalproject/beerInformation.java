@@ -181,8 +181,6 @@ public class beerInformation extends AppCompatActivity {
                             sum +=pValue;
                             mRatingTotal = GetBeerRating(sum,mRatingCount);
                             //Toast.makeText(beerInformation.this,"Total is: " +sum + " the : " + mRatingCount+ " The average is : "+ mRatingTotal,Toast.LENGTH_LONG).show();
-
-
                         }
 
                     }
@@ -210,8 +208,6 @@ public class beerInformation extends AppCompatActivity {
 
                     }
                 });
-
-
 
     }
     public float GetBeerRating(float pRatingTotal,int pCountTotal ){
