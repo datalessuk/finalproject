@@ -45,8 +45,8 @@
         android:layout_marginRight="82dp"
         android:layout_marginBottom="261dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Beer Name"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/beerInStockText"
@@ -63,19 +63,19 @@
         android:layout_marginRight="86dp"
         android:layout_marginBottom="198dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="In Stock"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/StockButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="101dp"
+        android:layout_height="58dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="155dp"
-        android:layout_marginRight="155dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginRight="146dp"
+        android:layout_marginBottom="75dp"
         android:text="Check In" />
 
 

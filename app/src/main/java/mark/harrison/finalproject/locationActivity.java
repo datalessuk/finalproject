@@ -60,7 +60,7 @@ public class locationActivity extends AppCompatActivity {
     private TextView mLatt;
     private static final int MY_PERMISSIONS_REQUEST_FIND_LOCATION =101;
     private static final int mProximityRadius = 1000;
-
+    private static final int mTestProximityRadius = 10000;
     private double mLatitude;
     private double mLongitude;
     private String test;
@@ -211,7 +211,7 @@ public class locationActivity extends AppCompatActivity {
     private String finalURL(double pLatitude , double pLongitude){
         StringBuilder googlePlaceURL = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         googlePlaceURL.append("location="+pLatitude+","+pLongitude);
-        googlePlaceURL.append("&radius="+mProximityRadius);
+        googlePlaceURL.append("&radius="+mTestProximityRadius);
         googlePlaceURL.append("&type="+mLocationType);
         googlePlaceURL.append("&key="+"AIzaSyAJ5R0rp7sj62zCghm2K1nrFP5tKmK6Udo");
 

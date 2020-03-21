@@ -26,19 +26,20 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="57dp"
         android:choiceMode="singleChoice"
+        android:listSelector="#6a0dad"
         android:layout_marginBottom="317dp" />
 
     <Switch
         android:id="@+id/InStockswitch"
-        android:layout_width="wrap_content"
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="160dp"
-        android:layout_marginRight="160dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
         android:layout_marginBottom="217dp"
-        android:text="InStock" />
+        android:text="In Stock" />
 
     <Button
         android:id="@+id/checkInButton"

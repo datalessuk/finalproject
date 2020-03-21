@@ -80,10 +80,7 @@ public class stockControlActivity extends AppCompatActivity {
                     //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
                     beerClassName = beers.getmName();
-
                     arrayAdapter.add(beerClassName);
-
-
 
                 }
                 arrayAdapter.notifyDataSetChanged();
@@ -102,8 +99,7 @@ public class stockControlActivity extends AppCompatActivity {
                 view.getFocusables(posisiton);
                 view.setSelected(true);
 
-                // ListView Clicked item value
-                itemValue    = (String) mBeerList.getItemAtPosition(posisiton);
+                itemValue = (String) mBeerList.getItemAtPosition(posisiton);
 
 
             }
@@ -117,23 +113,21 @@ public class stockControlActivity extends AppCompatActivity {
                         Boolean mInStock = false;
                         if(mInStockSwitch.isChecked()){
                             mInStock = true;
-
                         }
                         else{
                             mInStock = false;
                         }
                         Shops shops = new Shops(itemValue,mInStock);
                         myRef.child(itemValue).setValue(shops);
-
-
-
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 });
+                Intent intent = new Intent(stockControlActivity.this,homeScreen.class);
+                view.getContext().startActivity(intent);
+
             }
         });
 
