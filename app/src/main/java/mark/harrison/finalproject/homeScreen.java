@@ -38,7 +38,6 @@ public class homeScreen extends AppCompatActivity {
     private String mSeachResult;
 
     Button mLocationButton;
-    Button mBeerButtonTwo;
     Button mBeerButtonThree;
     Button mBeerButtonFour;
     Button mSignOutButton;

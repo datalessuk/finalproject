@@ -49,6 +49,7 @@ public class allBeers extends AppCompatActivity {
         setContentView(R.layout.activity_all_beers);
         mListView =(ListView) findViewById(R.id.allBeersList);
 
+
         DatabaseReference Reference = FirebaseDatabase.getInstance().getReference().child("Beers");
         //DatabaseReference zone1Ref = Reference.child(beerCode);
 
@@ -67,10 +68,7 @@ public class allBeers extends AppCompatActivity {
                     //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
                     String beerClass = beers.getmName();
-
                     arrayAdapter.add(beerClass);
-
-
 
                 }
                 arrayAdapter.notifyDataSetChanged();
@@ -85,27 +83,16 @@ public class allBeers extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                int itemPosition     = position;
+                int itemPosition = position;
 
                 // ListView Clicked item value
-                String  itemValue    = (String) listView.getItemAtPosition(position);
+                String itemValue = (String) listView.getItemAtPosition(position);
 
                 Intent intent = new Intent(allBeers.this, beerInformation.class);
                 intent.putExtra("Name", itemValue);
                 startActivity(intent);
 
-
-
-
-
-                // Show Toast
-                Toast.makeText(getApplicationContext(), "Position:"+itemPosition+"  Item Clicked: " +itemValue , Toast.LENGTH_LONG).show();
-
-                //Send item value over !
-
-
-
-
+                //Toast.makeText(getApplicationContext(), "Position:"+itemPosition+"  Item Clicked: " +itemValue , Toast.LENGTH_LONG).show();
             }
         });
 

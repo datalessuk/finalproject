@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,7 @@ public class stockControlActivity extends AppCompatActivity {
     private ListView mBeerList;
     private Button mCheckInButton;
     private Switch mInStockSwitch;
+    private TextView mShopName;
     ArrayList<String> mAllBeers = new ArrayList<>();
 
     //Shop Name
@@ -56,6 +58,7 @@ public class stockControlActivity extends AppCompatActivity {
         //Switch
         mInStockSwitch = (Switch)findViewById(R.id.InStockswitch);
         mCheckInButton = (Button)findViewById(R.id.checkInButton);
+        mShopName =(TextView)findViewById(R.id.shopNameText);
 
         //Getting Shop name
         final Intent intent = this.getIntent();
@@ -71,6 +74,9 @@ public class stockControlActivity extends AppCompatActivity {
         mBeerList.setAdapter(arrayAdapter);
         arrayAdapter.clear();
         //List of all beers
+
+        //Shop Name Text Setter
+        mShopName.setText(data.toString());
 
         Reference.addValueEventListener(new ValueEventListener() {
             @Override

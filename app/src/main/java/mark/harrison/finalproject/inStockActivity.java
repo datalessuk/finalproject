@@ -129,79 +129,6 @@ public class inStockActivity extends AppCompatActivity {
             }
         });
 
-        /*Reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayAdapter.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    //arrayAdapter.add(snapshot.getValue().toString());
-                    Beers beers = snapshot.getValue(Beers.class);
-                    beerClassName = beers.getmName();
-
-                    arrayAdapter.add(beerClassName);
-
-
-
-                }
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
-       /* mBeerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
-                int itemPosition     = position;
-
-                // ListView Clicked item value
-                String  itemValue = (String) mBeerList.getItemAtPosition(position);
-
-                myRef1.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Shops shops = dataSnapshot.getValue(Shops.class);
-                        Boolean inStock;
-                        inStock = shops.getmInStock();
-                        if(inStock==false){
-
-                        }
-
-                        //Beers beers = dataSnapshot.getValue(Beers.class);
-                        //String beerclass = beers.getmName();
-
-
-
-                        //boolean inStock = beers.getmStock();
-                        //mBeerName.setText(beerclass);
-                        //if(inStock ==false){
-                            //mBeerStock.setText("Sorry not in stock at this shop");
-                        //}
-                        //else{
-                            mBeerStock.setText("In Stock Enjoy!");
-                        //}
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
-
-        //beerReviews reviews = new beerReviews(reviewText);
-        //zone1Ref.child(String.valueOf(reviewID+1)).setValue(reviews);
-
-        //float vRating = mRatingBar.getRating();
-
-        //beersRatings beersRatings = new beersRatings(vRating);
-        //Ratingref1.child(String.valueOf(reviewCounter+1)).setValue(beersRatings);
-
-
         mStockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,34 +137,5 @@ public class inStockActivity extends AppCompatActivity {
                 view.getContext().startActivity(intent1);
             }
         });
-
-
-     /*   mStockButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Ratingref1.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Shops shops = new Shops(beerClassName,data,true);
-                        Ratingref1.child(beerClassName).setValue(shops);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
-
-
-
-
-
-
-
-
-
-
-
     }
 }

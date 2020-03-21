@@ -79,9 +79,6 @@ public class Beers {
 
     private int mRatingCounter;
 
-
-
-
     public Beers(){
     }
 
@@ -105,10 +102,6 @@ public class Beers {
 
     }
 
-
-    //public Beers(String pRating){
-        //this.mRating = pRating;
-    //}
 
     public Beers(String pFlavours){
         this.mFlavours = pFlavours;

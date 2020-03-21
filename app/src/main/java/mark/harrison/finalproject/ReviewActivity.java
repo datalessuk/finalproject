@@ -190,9 +190,6 @@ public class ReviewActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-
                 reviewText = mReviewText.getText().toString();
 
 

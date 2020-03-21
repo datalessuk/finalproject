@@ -7,18 +7,6 @@
     android:background="@drawable/background"
     tools:context=".ReviewActivity">
 
-    <Button
-        android:id="@+id/reviewTestbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="248dp"
-        android:layout_marginRight="248dp"
-        android:layout_marginBottom="374dp"
-        android:text="Button" />
-
     <RatingBar
         android:id="@+id/beerRatingBar"
         android:layout_width="wrap_content"
@@ -83,8 +71,8 @@
         android:layout_marginRight="88dp"
         android:layout_marginBottom="287dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="Beer Flavours"
+        android:inputType="textPersonName" />
 
 
 </RelativeLayout>
