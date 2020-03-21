@@ -189,14 +189,15 @@ public class signUpActivity extends AppCompatActivity {
                                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                                             if(!task.isSuccessful()){
-                                                Toast.makeText(signUpActivity.this,"test",Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(signUpActivity.this,"Sorry we can't make your account , please try another email ",Toast.LENGTH_SHORT).show();
 
 
                                             }
                                             else {
                                                 User user = new User(mFirstname,mUserName,mEmail);
-
-                                                myRef.child(mUserName).setValue(user);
+                                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                                //myRef.child(mUserName).setValue(user);
+                                                myRef.child(uid).setValue(user);
 
 
                                                 //myRef.child(String.valueOf(mMaxId+1)).setValue(user);
@@ -220,15 +221,6 @@ public class signUpActivity extends AppCompatActivity {
                         }
                     });
                 }
-
-
-
-
-
-
-
-
-
             }
 
 
