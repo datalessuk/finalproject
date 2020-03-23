@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".stockControlActivity"></activity>
+        <activity android:name=".topRatedActivity"></activity>
+        <activity android:name=".stockControlActivity" />
         <activity android:name=".inStockActivity" />
         <activity android:name=".locationActivity" />
         <activity android:name=".ReviewActivity" />
