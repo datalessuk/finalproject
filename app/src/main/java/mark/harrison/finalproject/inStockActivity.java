@@ -90,6 +90,7 @@ public class inStockActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
 
             }
         });
@@ -122,6 +123,7 @@ public class inStockActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        throw databaseError.toException();
 
                     }
                 });

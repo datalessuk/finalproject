@@ -94,6 +94,7 @@ public class stockControlActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
 
             }
         });
@@ -129,6 +130,7 @@ public class stockControlActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        throw databaseError.toException();
                     }
                 });
                 Intent intent = new Intent(stockControlActivity.this,homeScreen.class);

@@ -37,10 +37,12 @@ public class homeScreen extends AppCompatActivity {
     private TextView mSearchBar;
     private String mSeachResult;
 
-    Button mLocationButton;
-    Button mBeerButtonThree;
-    Button mBeerButtonFour;
-    Button mSignOutButton;
+    private Button mLocationButton;
+    private Button mBeerButtonThree;
+    private Button mBeerButtonFour;
+    private Button mSignOutButton;
+    private Button mTopRatedButton;
+
     private TextView mWelcomeText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class homeScreen extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                throw databaseError.toException();
 
             }
         });
@@ -106,6 +109,14 @@ public class homeScreen extends AppCompatActivity {
 
 
 
+    });
+    mTopRatedButton = (Button)findViewById(R.id.topRatedButton);
+    mTopRatedButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(view.getContext(),topRatedActivity.class);
+            view.getContext().startActivity(intent);
+        }
     });
 
 

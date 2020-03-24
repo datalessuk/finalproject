@@ -2,7 +2,7 @@ package mark.harrison.finalproject;
 
 import android.graphics.Bitmap;
 
-public class Beers {
+public class Beers implements Comparable<Beers> {
 
     public String getmName() {
         return mName;
@@ -89,6 +89,10 @@ public class Beers {
         this.mBrewery = pBrewery;
         this.mBarcode = pBarcode;
     }
+    @Override
+    public int compareTo(Beers beers) {
+        return this.mName.compareTo(beers.getmName());
+    }
 
 
     public Beers(String pName,String pBrewery,String pBarcode,boolean pStock,String pFlavours,String pPercentage,float pRating){
@@ -110,4 +114,6 @@ public class Beers {
     public Beers(float pRating){
         this.mRating =pRating;
     }
+
+
 }

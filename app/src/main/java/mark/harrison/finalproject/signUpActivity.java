@@ -217,6 +217,7 @@ public class signUpActivity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
+                            throw databaseError.toException();
 
                         }
                     });
