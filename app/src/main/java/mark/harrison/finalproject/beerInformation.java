@@ -54,6 +54,7 @@ public class beerInformation extends AppCompatActivity {
     private ListView mListView;
     int mRatingCount;
     float mRatingTotal;
+    float setRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class beerInformation extends AppCompatActivity {
         final DatabaseReference ratingRef = FirebaseDatabase.getInstance().getReference("Ratings");
         final DatabaseReference Ratingref1 = ratingRef.child(data);
 
+        //Setting the Rating
+
 
         setContentView(R.layout.activity_beer_information);
 
@@ -95,7 +98,6 @@ public class beerInformation extends AppCompatActivity {
         mListView.setAdapter(arrayAdapter);
         arrayAdapter.clear();
 
-
         zone1Ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -108,13 +110,14 @@ public class beerInformation extends AppCompatActivity {
                     String brewery = beers.getmBrewery();
                     String percentage = beers.getmPercentage();
                     String flavours =beers.getmFlavours();
-                    float setRating = beers.getmRating();
+                    setRating = beers.getmRating();
 
                     mBeername.setText("Beer: "+beerclass);
                     mBeerBrewery.setText("Brewery: " +brewery);
                     mBeerPercentage.setText("Percentage " +percentage+"%");
                     mBeerFlavours.setText("Beer Flavours: "+flavours);
-                    mRatingBar.setRating(setRating);
+
+                    mRatingBar.setRating(mRatingTotal);
 
             }
 
@@ -124,6 +127,8 @@ public class beerInformation extends AppCompatActivity {
 
             }
         });
+
+
 
         mReviewButton = (Button)findViewById(R.id.addReviewButton);
         mReviewButton.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +187,7 @@ public class beerInformation extends AppCompatActivity {
                             float pValue = Float.parseFloat(String.valueOf(value));
                             sum +=pValue;
                             mRatingTotal = GetBeerRating(sum,mRatingCount);
-                            //Toast.makeText(beerInformation.this,"Total is: " +sum + " the : " + mRatingCount+ " The average is : "+ mRatingTotal,Toast.LENGTH_LONG).show();
+                            //mRatingTotal = sum / mRatingCount;
                         }
 
                     }
@@ -194,6 +199,8 @@ public class beerInformation extends AppCompatActivity {
                     }
                 });
 
+
+
                 beerratingRef1.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -203,6 +210,7 @@ public class beerInformation extends AppCompatActivity {
                         result.put("mRating",mRatingTotal);
                         //Beers beers = new Beers(flavours);
                         beerratingRef1.updateChildren(result);
+
                         //result.put("mRating",mRating);
                     }
 
@@ -213,7 +221,12 @@ public class beerInformation extends AppCompatActivity {
                     }
                 });
 
+
+
     }
+
+
+
     public float GetBeerRating(float pRatingTotal,int pCountTotal ){
         float mRating = pRatingTotal/ pCountTotal;
         return  mRating;

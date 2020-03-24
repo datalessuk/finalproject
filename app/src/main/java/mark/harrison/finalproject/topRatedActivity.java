@@ -36,28 +36,6 @@ public class topRatedActivity extends AppCompatActivity {
         mTopRatedList.setAdapter(arrayAdapter);
         arrayAdapter.clear();
 
-
-        /*Reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                arrayAdapter.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    //arrayAdapter.add(snapshot.getValue().toString());
-                    Beers beers = snapshot.getValue(Beers.class);
-                    String beerClass = beers.getmName();
-                    Float beerRating = beers.getmRating();
-                    //Collections.sort()
-                    arrayAdapter.add(beerClass+ "User Rating is " + beerRating);
-
-                }
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
         Reference.orderByChild("mRating").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -66,9 +44,9 @@ public class topRatedActivity extends AppCompatActivity {
                     Beers beers = snapshot.getValue(Beers.class);
                     String beerClass = beers.getmName();
                     Float beerRating = beers.getmRating();
-                    //Collections.sort()
 
-                    arrayAdapter.add(beerClass + " User Rating is " + beerRating);
+
+                    arrayAdapter.add(beerClass + " User rating is " + beerRating);
                 }
                 Collections.reverse(mAllBeers);
             }

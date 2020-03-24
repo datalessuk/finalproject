@@ -41,7 +41,7 @@ public class allBeers extends AppCompatActivity {
     DatabaseReference myRef;
     ArrayList<String> mAllBeers = new ArrayList<>();
 
-
+    float mRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,10 @@ public class allBeers extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     //arrayAdapter.add(snapshot.getValue().toString());
                     Beers beers = snapshot.getValue(Beers.class);
+                    Beers beers2 = snapshot.getValue(Beers.class);
+                    mRating = beers2.getmRating();
                     String beerClass = beers.getmName();
+
                     arrayAdapter.add(beerClass);
 
                 }
@@ -76,7 +79,6 @@ public class allBeers extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                throw databaseError.toException();
 
             }
         });
