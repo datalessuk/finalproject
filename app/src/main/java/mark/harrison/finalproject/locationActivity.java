@@ -186,7 +186,7 @@ public class locationActivity extends AppCompatActivity {
         googlePlaceURL.append("location="+pLatitude+","+pLongitude);
         googlePlaceURL.append("&radius="+mTestProximityRadius);
         googlePlaceURL.append("&type="+mLocationType);
-        googlePlaceURL.append("&key="+"AIzaSyAJ5R0rp7sj62zCghm2K1nrFP5tKmK6Udo");
+        googlePlaceURL.append("");
 
 
         Log.d("Full url is: ", ""+ googlePlaceURL.toString());
